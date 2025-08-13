@@ -81,6 +81,7 @@ const customerImages = [
 const Footer = React.memo(() => {
   const [index, setIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(3);
+  const [isPaused, setIsPaused] = useState(false);
   const trackRef = useRef(null);
   const transitioning = useRef(false);
 
@@ -91,11 +92,11 @@ const Footer = React.memo(() => {
   useEffect(() => {
     const updateVisibleCount = () => {
       if (window.innerWidth < 640) {
-        setVisibleCount(2);
+        setVisibleCount(3);
       } else if (window.innerWidth < 1024) {
-        setVisibleCount(4);
+        setVisibleCount(5);
       } else {
-        setVisibleCount(6);
+        setVisibleCount(7);
       }
     };
     updateVisibleCount();
@@ -113,9 +114,11 @@ const Footer = React.memo(() => {
   }, []);
 
   useEffect(() => {
-    const timer = setInterval(next, 3000);
+    if (isPaused) return;
+    
+    const timer = setInterval(next, 2500);
     return () => clearInterval(timer);
-  }, [next]);
+  }, [next, isPaused]);
 
   // Handle loop reset
   useEffect(() => {
@@ -143,7 +146,12 @@ const Footer = React.memo(() => {
       <div className="container mx-auto px-4 mb-12">
         <h3 className="text-2xl font-bold text-center mb-8">Our Valued Customers</h3>
         <div className="relative max-w-6xl mx-auto">
-          <div className="overflow-hidden mx-auto" style={{ width: `${(slideWidth + gapWidth) * visibleCount - gapWidth}px` }}>
+          <div 
+            className="overflow-hidden mx-auto" 
+            style={{ width: `${(slideWidth + gapWidth) * visibleCount - gapWidth}px` }}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
             <div
               ref={trackRef}
               className="flex space-x-6 transition-transform duration-500 ease-in-out"
@@ -154,12 +162,12 @@ const Footer = React.memo(() => {
               {extendedImages.map((image, idx) => (
                 <div
                   key={idx}
-                  className="w-40 h-40 rounded-lg overflow-hidden shadow-lg flex-shrink-0"
+                  className="w-40 h-40 rounded-lg overflow-hidden shadow-lg flex-shrink-0 hover:shadow-xl transition-shadow duration-300"
                 >
                   <img
                     src={image}
                     alt={`Customer ${idx + 1}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                   />
                 </div>

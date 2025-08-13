@@ -8,8 +8,13 @@ import LoadingSpinner from './components/LoadingSpinner';
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
+const Desktop = lazy(() => import('./pages/Desktop'));
 const Laptop = lazy(() => import('./pages/Laptop'));
 const Printer = lazy(() => import('./pages/Printer'));
+const Tablet = lazy(() => import('./pages/Tablet'));
+const Software = lazy(() => import('./pages/Software'));
+const MobileAccessories = lazy(() => import('./pages/MobileAccessories'));
+const PowerSolutions = lazy(() => import('./pages/PowerSolutions'));
 const Shop = lazy(() => import('./pages/Shop'));
 const Rental = lazy(() => import('./pages/Rental'));
 const Blog = lazy(() => import('./pages/Blog'));
@@ -29,8 +34,13 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
+              <Route path="/desktop" element={<Desktop />} />
               <Route path="/laptop" element={<Laptop />} />
               <Route path="/printer" element={<Printer />} />
+              <Route path="/tablet" element={<Tablet />} />
+              <Route path="/software" element={<Software />} />
+              <Route path="/mobile-accessories" element={<MobileAccessories />} />
+              <Route path="/power-solutions" element={<PowerSolutions />} />
               <Route path="/shop" element={<Shop />} />
               <Route path="/rental" element={<Rental />} />
               <Route path="/blog" element={<Blog />} />

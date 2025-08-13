@@ -79,7 +79,7 @@ const Customers = React.memo(() => {
   ], []);
 
   return (
-    <div className="py-1">
+    <div className="py-5">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-16">
         <div className="container mx-auto px-4 text-center">

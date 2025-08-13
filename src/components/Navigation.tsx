@@ -9,19 +9,25 @@ const Navigation = React.memo(() => {
 
   const toggleMenu = useCallback(() => {
     setIsMenuOpen(prev => !prev);
+    setActiveDropdown(null); // Close any open dropdowns when toggling menu
   }, []);
 
   const handleDropdownToggle = useCallback((menu: string) => {
     setActiveDropdown(prev => prev === menu ? null : menu);
   }, []);
 
+  const handleMobileLinkClick = useCallback(() => {
+    setIsMenuOpen(false);
+    setActiveDropdown(null);
+  }, []);
+
   const itProducts = [
-    { title: 'Desktop', href: '/coming-soon' },
+    { title: 'Desktop', href: '/desktop' },
     { title: 'Laptop', href: '/laptop' },
     { title: 'Printer', href: '/printer' },
-    { title: 'Tablet', href: '/coming-soon' },
-    { title: 'Software', href: '/coming-soon' },
-    { title: 'Mobile Accessories', href: '/coming-soon' },
+    { title: 'Tablet', href: '/tablet' },
+    { title: 'Software', href: '/software' },
+    { title: 'Mobile Accessories', href: '/mobile-accessories' },
     { title: 'Server & Workstation', href: '/coming-soon' },
     { title: 'Network Hardware Solution', href: '/coming-soon' },
     { title: 'Online & Offline UPS', href: '/coming-soon' },
@@ -87,7 +93,7 @@ const Navigation = React.memo(() => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center justify-between space-x-2">
             <div className="relative group">
-              <Link to="/coming-soon" className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors">
+              <Link to="/power-solutions" className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors">
                 <span>Power Solutions</span>
               </Link>
             </div>
@@ -139,7 +145,7 @@ const Navigation = React.memo(() => {
             <Link to="/blog" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/blog' ? 'text-blue-600 font-medium' : ''}`}>
               Blog
             </Link>
-            <Link to="/contact" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/contact' ? 'text-blue-600 font-medium' : ''}`}>
+            <Link to="/power-solutions" className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors">
               Contact Us
             </Link>
           </div>
@@ -158,7 +164,7 @@ const Navigation = React.memo(() => {
           <div className="lg:hidden py-4 border-t border-gray-200">
             <div className="space-y-4">
               <div>
-                <Link to="/coming-soon" className="block text-gray-700 hover:text-blue-600 transition-colors">
+                <Link to="/power-solutions" className="block text-gray-700 hover:text-blue-600 transition-colors">
                   <span>Power Solutions</span>
                 </Link>
               </div>
@@ -173,7 +179,7 @@ const Navigation = React.memo(() => {
                 {activeDropdown === 'it' && (
                   <div className="ml-4 mt-2 space-y-2">
                     {itProducts.map((product, index) => (
-                      <Link key={index} to={product.href} className="block text-sm text-gray-600 hover:text-blue-600 transition-colors">
+                      <Link key={index} to={product.href} onClick={handleMobileLinkClick} className="block text-sm text-gray-600 hover:text-blue-600 transition-colors">
                         {product.title}
                       </Link>
                     ))}
@@ -191,20 +197,20 @@ const Navigation = React.memo(() => {
                 {activeDropdown === 'security' && (
                   <div className="ml-4 mt-2 space-y-2">
                     {securitySolutions.map((solution, index) => (
-                      <Link key={index} to={solution.href} className="block text-sm text-gray-600 hover:text-blue-600 transition-colors">
+                      <Link key={index} to={solution.href} onClick={handleMobileLinkClick} className="block text-sm text-gray-600 hover:text-blue-600 transition-colors">
                         {solution.title}
                       </Link>
                     ))}
                   </div>
                 )}
               </div>
-              <Link to="/about" className="block text-gray-700 hover:text-blue-600 transition-colors">About Us</Link>
-              <Link to="/services" className="block text-gray-700 hover:text-blue-600 transition-colors">Our Services</Link>
-              <Link to="/customers" className="block text-gray-700 hover:text-blue-600 transition-colors">Our Customers</Link>
-              <Link to="/rental" className="block text-gray-700 hover:text-blue-600 transition-colors">Rental</Link>
-              <Link to="/shop" className="block text-gray-700 hover:text-blue-600 transition-colors">Shop</Link>
-              <Link to="/blog" className="block text-gray-700 hover:text-blue-600 transition-colors">Blog</Link>
-              <Link to="/contact" className="block text-gray-700 hover:text-blue-600 transition-colors">Contact Us</Link>
+              <Link to="/about" onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">About Us</Link>
+              <Link to="/services" onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">Our Services</Link>
+              <Link to="/customers" onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">Our Customers</Link>
+              <Link to="/rental" onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">Rental</Link>
+              <Link to="/shop" onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">Shop</Link>
+              <Link to="/blog" onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">Blog</Link>
+              <Link to="/contact" onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">Contact Us</Link>
             </div>
           </div>
         )}

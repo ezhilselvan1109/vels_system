@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const ComingSoon = React.memo(() => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-700 to-blue-500 flex items-center justify-center">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto py-6 px-4">
         <div className="max-w-2xl mx-auto text-center text-white">
           <div className="mb-8">
             <Clock size={80} className="mx-auto mb-6 text-yellow-400" />

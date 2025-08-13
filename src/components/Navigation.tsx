@@ -59,7 +59,7 @@ const Navigation = React.memo(() => {
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4">
-        <div className="py-4">
+        <div className="flex flex-row lg:flex-col justify-between py-4">
           {/* Logo */}
           <div className="flex justify-between items-center space-x-4">
             <div className="text-2xl font-bold text-blue-900">
@@ -71,7 +71,7 @@ const Navigation = React.memo(() => {
                 />
               </Link>
             </div>
-            <div className="hidden md:flex gap-4">
+            <div className="hidden md:flex gap-6">
               <img
                 src="/25_years_of_excellence_vel_systems-removebg-preview.png"
                 alt="25 Years Excellence"
@@ -92,11 +92,9 @@ const Navigation = React.memo(() => {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center justify-between space-x-2">
-            <div className="relative group">
-              <Link to="/power-solutions" className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors">
-                <span>Power Solutions</span>
-              </Link>
-            </div>
+             <Link to="/power-solutions" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/about' ? 'text-blue-600 font-medium' : ''}`}>
+              Power Solutions
+            </Link>
             <div className="relative group">
               <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors">
                 <span>IT Products & Solutions</span>

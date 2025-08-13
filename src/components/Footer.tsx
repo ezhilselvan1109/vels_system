@@ -92,11 +92,11 @@ const Footer = React.memo(() => {
   useEffect(() => {
     const updateVisibleCount = () => {
       if (window.innerWidth < 640) {
-        setVisibleCount(3);
+        setVisibleCount(2);
       } else if (window.innerWidth < 1024) {
-        setVisibleCount(5);
+        setVisibleCount(4);
       } else {
-        setVisibleCount(7);
+        setVisibleCount(6);
       }
     };
     updateVisibleCount();

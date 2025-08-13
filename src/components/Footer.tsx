@@ -1,78 +1,170 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const customerImages = [
-  'https://images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg?auto=compress&cs=tinysrgb&w=300',
-  'https://images.pexels.com/photos/416405/pexels-photo-416405.jpeg?auto=compress&cs=tinysrgb&w=300',
-  'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=300',
-  'https://images.pexels.com/photos/1181316/pexels-photo-1181316.jpeg?auto=compress&cs=tinysrgb&w=300',
-  'https://images.pexels.com/photos/7613568/pexels-photo-7613568.jpeg?auto=compress&cs=tinysrgb&w=300',
-  'https://images.pexels.com/photos/3183165/pexels-photo-3183165.jpeg?auto=compress&cs=tinysrgb&w=300',
-  'https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=300',
-  'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=300',
-  'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=300',
-  'https://images.pexels.com/photos/7688390/pexels-photo-7688390.jpeg?auto=compress&cs=tinysrgb&w=300'
+  '/customer/customer-1.jpeg',
+    '/customer/customer-2.png',
+    '/customer/customer-3.jpeg',
+    '/customer/customer-4.jpeg',
+    '/customer/customer-5.jpeg',
+    '/customer/customer-6.jpg',
+    '/customer/customer-7.png',
+    '/customer/customer-8.png',
+    '/customer/customer-9.jpg',
+    '/customer/customer-10.png',
+
+    '/customer/customer-11.png',
+    '/customer/customer-12.png',
+    '/customer/customer-13.jpg',
+    '/customer/customer-14.png',
+    '/customer/customer-15.jpg',
+    '/customer/customer-16.png',
+    '/customer/customer-17.png',
+    '/customer/customer-18.jpg',
+    '/customer/customer-19.jpg',
+    '/customer/customer-20.jpg',
+
+    '/customer/customer-21.jpg',
+    '/customer/customer-22.jpg',
+    '/customer/customer-23.jpg',
+    '/customer/customer-24.jpg',
+    '/customer/customer-25.jpg',
+    '/customer/customer-26.jpg',
+    '/customer/customer-27.jpg',
+    '/customer/customer-28.jpg',
+    '/customer/customer-29.jpg',
+    '/customer/customer-30.jpg',
+
+    '/customer/customer-31.jpg',
+    '/customer/customer-32.jpg',
+    '/customer/customer-33.jpg',
+    '/customer/customer-34.jpg',
+    '/customer/customer-35.jpg',
+    '/customer/customer-36.jpg',
+    '/customer/customer-37.jpg',
+    '/customer/customer-38.jpg',
+    '/customer/customer-39.jpg',
+    '/customer/customer-40.jpg',
+
+    '/customer/customer-41.jpg',
+    '/customer/customer-42.jpg',
+    '/customer/customer-43.jpg',
+    '/customer/customer-44.jpg',
+    '/customer/customer-45.jpg',
+    '/customer/customer-46.jpg',
+    '/customer/customer-47.jpg',
+    '/customer/customer-48.jpg',
+    '/customer/customer-49.jpg',
+    '/customer/customer-50.jpg',
+
+    '/customer/customer-51.jpg',
+    '/customer/customer-52.jpg',
+    '/customer/customer-53.jpg',
+    '/customer/customer-54.jpg',
+    '/customer/customer-55.jpg',
+    '/customer/customer-56.jpg',
+    '/customer/customer-57.jpg',
+    '/customer/customer-58.jpg',
+    '/customer/customer-59.jpg',
+    '/customer/customer-60.jpg',
+
+    '/customer/customer-61.jpg',
+    '/customer/customer-62.jpg',
+    '/customer/customer-63.jpg',
+    '/customer/customer-64.jpg',
+    '/customer/customer-65.jpg',
+    '/customer/customer-66.jpg',
+    '/customer/customer-67.jpg',
+    '/customer/customer-68.jpg',
 ];
 
 const Footer = React.memo(() => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [index, setIndex] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(3);
+  const trackRef = useRef(null);
+  const transitioning = useRef(false);
 
-  const nextImages = useCallback(() => {
-    setCurrentImageIndex(prev => (prev + 3) % customerImages.length);
+  const slideWidth = 160; // w-40 = 160px
+  const gapWidth = 24; // space-x-6 = 1.5rem = 24px
+
+  // Adjust visibleCount based on screen width
+  useEffect(() => {
+    const updateVisibleCount = () => {
+      if (window.innerWidth < 640) {
+        setVisibleCount(2);
+      } else if (window.innerWidth < 1024) {
+        setVisibleCount(4);
+      } else {
+        setVisibleCount(6);
+      }
+    };
+    updateVisibleCount();
+    window.addEventListener('resize', updateVisibleCount);
+    return () => window.removeEventListener('resize', updateVisibleCount);
   }, []);
 
-  const prevImages = useCallback(() => {
-    setCurrentImageIndex(prev => (prev - 3 + customerImages.length) % customerImages.length);
+  // Create extended array with clones
+  const extendedImages = [...customerImages, ...customerImages.slice(0, visibleCount)];
+
+  const next = useCallback(() => {
+    if (transitioning.current) return;
+    transitioning.current = true;
+    setIndex(prev => prev + 1);
   }, []);
 
   useEffect(() => {
-    const timer = setInterval(nextImages, 3000);
+    const timer = setInterval(next, 3000);
     return () => clearInterval(timer);
-  }, [nextImages]);
+  }, [next]);
 
-  const getVisibleImages = () => {
-    const images = [];
-    for (let i = 0; i < 3; i++) {
-      const index = (currentImageIndex + i) % customerImages.length;
-      images.push(customerImages[index]);
-    }
-    return images;
-  };
+  // Handle loop reset
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const handleTransitionEnd = () => {
+      transitioning.current = false;
+      if (index >= customerImages.length) {
+        track.style.transition = 'none';
+        setIndex(0);
+        requestAnimationFrame(() => {
+          track.style.transition = 'transform 0.5s ease-in-out';
+        });
+      }
+    };
+
+    track.addEventListener('transitionend', handleTransitionEnd);
+    return () => track.removeEventListener('transitionend', handleTransitionEnd);
+  }, [index]);
 
   return (
     <footer className="bg-gray-900 text-white pt-16 pb-8">
       {/* Customer Images Carousel */}
       <div className="container mx-auto px-4 mb-12">
         <h3 className="text-2xl font-bold text-center mb-8">Our Valued Customers</h3>
-        <div className="relative max-w-4xl mx-auto">
-          <div className="flex items-center justify-center space-x-6">
-            <button
-              onClick={prevImages}
-              className="text-white hover:text-blue-400 transition-colors p-2"
+        <div className="relative max-w-6xl mx-auto">
+          <div className="overflow-hidden mx-auto" style={{ width: `${(slideWidth + gapWidth) * visibleCount - gapWidth}px` }}>
+            <div
+              ref={trackRef}
+              className="flex space-x-6 transition-transform duration-500 ease-in-out"
+              style={{
+                transform: `translateX(-${index * (slideWidth + gapWidth)}px)`
+              }}
             >
-              <ChevronLeft size={24} />
-            </button>
-            
-            <div className="flex space-x-6 overflow-hidden">
-              {getVisibleImages().map((image, index) => (
-                <div key={index} className="w-32 h-32 md:w-40 md:h-40 rounded-lg overflow-hidden shadow-lg">
-                  <img 
-                    src={image} 
-                    alt={`Customer ${index + 1}`}
+              {extendedImages.map((image, idx) => (
+                <div
+                  key={idx}
+                  className="w-40 h-40 rounded-lg overflow-hidden shadow-lg flex-shrink-0"
+                >
+                  <img
+                    src={image}
+                    alt={`Customer ${idx + 1}`}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
                 </div>
               ))}
             </div>
-            
-            <button
-              onClick={nextImages}
-              className="text-white hover:text-blue-400 transition-colors p-2"
-            >
-              <ChevronRight size={24} />
-            </button>
           </div>
         </div>
       </div>
@@ -81,7 +173,6 @@ const Footer = React.memo(() => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="flex flex-wrap justify-center md:justify-start gap-6 text-sm">
-            <Link to="/" className="hover:text-blue-400 transition-colors">Home</Link>
             <a href="#about" className="hover:text-blue-400 transition-colors">About Us</a>
             <Link to="/services" className="hover:text-blue-400 transition-colors">Our Services</Link>
             <Link to="/contact" className="hover:text-blue-400 transition-colors">Contact Us</Link>

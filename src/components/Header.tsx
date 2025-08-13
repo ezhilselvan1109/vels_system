@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, MessageCircle, Facebook, Instagram, Youtube } from 'lucide-react';
+import { Phone, Mail, Facebook, Instagram, Youtube, MessageCircleMore } from 'lucide-react';
 
 const Header = React.memo(() => {
   return (
@@ -21,9 +21,8 @@ const Header = React.memo(() => {
           {/* Social Media Links */}
           <div className="flex items-center space-x-4">
             <a href="https://wa.me/916572263827" target="_blank" rel="noopener noreferrer" 
-               className="flex items-center space-x-1 hover:text-green-400 transition-colors">
-              <MessageCircle size={16} />
-              <span className="text-xs">WhatsApp</span>
+               className="hover:text-green-400 transition-colors">
+              <MessageCircleMore size={16}/>
             </a>
             <a href="#" target="_blank" rel="noopener noreferrer" 
                className="hover:text-blue-400 transition-colors">

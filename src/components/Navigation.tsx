@@ -53,40 +53,39 @@ const Navigation = React.memo(() => {
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center py-4">
+        <div className="py-4">
           {/* Logo */}
-          <div className="flex items-center space-x-4">
+          <div className="flex justify-between items-center space-x-4">
             <div className="text-2xl font-bold text-blue-900">
-            <img 
-                src="/vels-logo.png" 
-                alt="logo" 
-                className="h-15 w-auto object-contain"
-              />
+              <Link to="/" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/' ? 'text-blue-600 font-medium' : ''}`}>
+                <img
+                  src="/vels-logo.png"
+                  alt="logo"
+                  className="h-10 w-auto object-contain"
+                />
+              </Link>
             </div>
-            <div className="hidden md:flex space-x-2">
-              <img 
-                src="/25_years_of_excellence_vel_systems-removebg-preview.png" 
-                alt="25 Years Excellence" 
-                className="h-10 w-auto object-contain"
+            <div className="hidden md:flex gap-4">
+              <img
+                src="/25_years_of_excellence_vel_systems-removebg-preview.png"
+                alt="25 Years Excellence"
+                className="h-7 w-auto object-contain"
               />
-              <img 
-                src="/gem-logo-1-1-300x143.png" 
-                alt="GEM Logo" 
-                className="h-10 w-auto object-contain"
+              <img
+                src="/gem-logo-1-1-300x143.png"
+                alt="GEM Logo"
+                className="h-7 w-auto object-contain"
               />
-              <img 
-                src="/iso2015-1024x395-1.png" 
-                alt="ISO 2015" 
-                className="h-10 w-auto object-contain"
+              <img
+                src="/iso2015-1024x395-1.png"
+                alt="ISO 2015"
+                className="h-7 w-auto object-contain"
               />
             </div>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
-            <Link to="/" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/' ? 'text-blue-600 font-medium' : ''}`}>
-              Home
-            </Link>
+          <div className="hidden lg:flex items-center justify-between space-x-2">
             <div className="relative group">
               <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors">
                 <span>Power Solutions</span>
@@ -154,18 +153,16 @@ const Navigation = React.memo(() => {
         {isMenuOpen && (
           <div className="lg:hidden py-4 border-t border-gray-200">
             <div className="space-y-4">
-              <Link to="/" className="block text-gray-700 hover:text-blue-600 transition-colors">Home</Link>
               <div>
-                <button 
+                <button
                   onClick={() => handleDropdownToggle('power')}
                   className="flex items-center justify-between w-full text-gray-700 hover:text-blue-600 transition-colors"
                 >
                   <span>Power Solutions</span>
-                  <ChevronDown size={16} />
                 </button>
               </div>
               <div>
-                <button 
+                <button
                   onClick={() => handleDropdownToggle('it')}
                   className="flex items-center justify-between w-full text-gray-700 hover:text-blue-600 transition-colors"
                 >
@@ -183,7 +180,7 @@ const Navigation = React.memo(() => {
                 )}
               </div>
               <div>
-                <button 
+                <button
                   onClick={() => handleDropdownToggle('security')}
                   className="flex items-center justify-between w-full text-gray-700 hover:text-blue-600 transition-colors"
                 >

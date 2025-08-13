@@ -16,38 +16,38 @@ const Navigation = React.memo(() => {
   }, []);
 
   const itProducts = [
-    { title: 'Desktop', href: '#desktop' },
-    { title: 'Laptop', href: '#laptop' },
-    { title: 'Printer', href: '#printer' },
-    { title: 'Tablet', href: '#tablet' },
-    { title: 'Software', href: '#software' },
-    { title: 'Mobile Accessories', href: '#mobile-accessories' },
-    { title: 'Server & Workstation', href: '#server' },
-    { title: 'Network Hardware Solution', href: '#network' },
-    { title: 'Online & Offline UPS', href: '#ups' },
-    { title: 'Firewall', href: '#firewall' },
-    { title: 'IT Peripherals', href: '#peripherals' },
-    { title: 'WiFi Access Point', href: '#wifi' },
-    { title: 'Photocopier', href: '#photocopier' },
-    { title: 'Data Storage', href: '#storage' },
-    { title: 'Data Recovery', href: '#recovery' },
-    { title: 'Projector', href: '#projector' }
+    { title: 'Desktop', href: '/coming-soon' },
+    { title: 'Laptop', href: '/laptop' },
+    { title: 'Printer', href: '/printer' },
+    { title: 'Tablet', href: '/coming-soon' },
+    { title: 'Software', href: '/coming-soon' },
+    { title: 'Mobile Accessories', href: '/coming-soon' },
+    { title: 'Server & Workstation', href: '/coming-soon' },
+    { title: 'Network Hardware Solution', href: '/coming-soon' },
+    { title: 'Online & Offline UPS', href: '/coming-soon' },
+    { title: 'Firewall', href: '/coming-soon' },
+    { title: 'IT Peripherals', href: '/coming-soon' },
+    { title: 'WiFi Access Point', href: '/coming-soon' },
+    { title: 'Photocopier', href: '/coming-soon' },
+    { title: 'Data Storage', href: '/coming-soon' },
+    { title: 'Data Recovery', href: '/coming-soon' },
+    { title: 'Projector', href: '/coming-soon' }
   ];
 
   const securitySolutions = [
-    { title: 'CCTV Camera', href: '#cctv' },
-    { title: 'Door Access Control', href: '#door-access' },
-    { title: 'Biometric System', href: '#biometric' },
-    { title: 'Intercom', href: '#intercom' },
-    { title: 'Boom Barrier', href: '#boom-barrier' },
-    { title: 'Metal Detector & Signal Jammer', href: '#metal-detector' },
-    { title: 'Signal Booster', href: '#signal-booster' },
-    { title: 'Video Door Phone', href: '#video-door-phone' },
-    { title: 'Cash Counting Machine', href: '#cash-counter' },
-    { title: 'Fire Alarms', href: '#fire-alarms' },
-    { title: 'Safety Lockers', href: '#safety-lockers' },
-    { title: 'GPS Vehicle Tracker', href: '#gps-tracker' },
-    { title: 'Burglar Alarm System', href: '#burglar-alarm' }
+    { title: 'CCTV Camera', href: '/coming-soon' },
+    { title: 'Door Access Control', href: '/coming-soon' },
+    { title: 'Biometric System', href: '/coming-soon' },
+    { title: 'Intercom', href: '/coming-soon' },
+    { title: 'Boom Barrier', href: '/coming-soon' },
+    { title: 'Metal Detector & Signal Jammer', href: '/coming-soon' },
+    { title: 'Signal Booster', href: '/coming-soon' },
+    { title: 'Video Door Phone', href: '/coming-soon' },
+    { title: 'Cash Counting Machine', href: '/coming-soon' },
+    { title: 'Fire Alarms', href: '/coming-soon' },
+    { title: 'Safety Lockers', href: '/coming-soon' },
+    { title: 'GPS Vehicle Tracker', href: '/coming-soon' },
+    { title: 'Burglar Alarm System', href: '/coming-soon' }
   ];
 
   return (
@@ -87,9 +87,9 @@ const Navigation = React.memo(() => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center justify-between space-x-2">
             <div className="relative group">
-              <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors">
+              <Link to="/coming-soon" className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors">
                 <span>Power Solutions</span>
-              </button>
+              </Link>
             </div>
             <div className="relative group">
               <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors">
@@ -99,9 +99,9 @@ const Navigation = React.memo(() => {
               <div className="absolute left-0 mt-2 w-80 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                 <div className="grid grid-cols-2 gap-2 p-4">
                   {itProducts.map((product, index) => (
-                    <a key={index} href={product.href} className="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded transition-colors">
+                    <Link key={index} to={product.href} className="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded transition-colors">
                       {product.title}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -114,14 +114,16 @@ const Navigation = React.memo(() => {
               <div className="absolute left-0 mt-2 w-80 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                 <div className="grid grid-cols-2 gap-2 p-4">
                   {securitySolutions.map((solution, index) => (
-                    <a key={index} href={solution.href} className="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded transition-colors">
+                    <Link key={index} to={solution.href} className="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded transition-colors">
                       {solution.title}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
             </div>
-            <a href="#about" className="text-gray-700 hover:text-blue-600 transition-colors">About Us</a>
+            <Link to="/about" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/about' ? 'text-blue-600 font-medium' : ''}`}>
+              About Us
+            </Link>
             <Link to="/services" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/services' ? 'text-blue-600 font-medium' : ''}`}>
               Our Services
             </Link>
@@ -131,7 +133,9 @@ const Navigation = React.memo(() => {
             <Link to="/rental" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/rental' ? 'text-blue-600 font-medium' : ''}`}>
               Rental
             </Link>
-            <a href="#shop" className="text-gray-700 hover:text-blue-600 transition-colors">Shop</a>
+            <Link to="/shop" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/shop' ? 'text-blue-600 font-medium' : ''}`}>
+              Shop
+            </Link>
             <Link to="/blog" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/blog' ? 'text-blue-600 font-medium' : ''}`}>
               Blog
             </Link>
@@ -154,12 +158,9 @@ const Navigation = React.memo(() => {
           <div className="lg:hidden py-4 border-t border-gray-200">
             <div className="space-y-4">
               <div>
-                <button
-                  onClick={() => handleDropdownToggle('power')}
-                  className="flex items-center justify-between w-full text-gray-700 hover:text-blue-600 transition-colors"
-                >
+                <Link to="/coming-soon" className="block text-gray-700 hover:text-blue-600 transition-colors">
                   <span>Power Solutions</span>
-                </button>
+                </Link>
               </div>
               <div>
                 <button
@@ -172,9 +173,9 @@ const Navigation = React.memo(() => {
                 {activeDropdown === 'it' && (
                   <div className="ml-4 mt-2 space-y-2">
                     {itProducts.map((product, index) => (
-                      <a key={index} href={product.href} className="block text-sm text-gray-600 hover:text-blue-600 transition-colors">
+                      <Link key={index} to={product.href} className="block text-sm text-gray-600 hover:text-blue-600 transition-colors">
                         {product.title}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 )}
@@ -190,18 +191,18 @@ const Navigation = React.memo(() => {
                 {activeDropdown === 'security' && (
                   <div className="ml-4 mt-2 space-y-2">
                     {securitySolutions.map((solution, index) => (
-                      <a key={index} href={solution.href} className="block text-sm text-gray-600 hover:text-blue-600 transition-colors">
+                      <Link key={index} to={solution.href} className="block text-sm text-gray-600 hover:text-blue-600 transition-colors">
                         {solution.title}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 )}
               </div>
-              <a href="#about" className="block text-gray-700 hover:text-blue-600 transition-colors">About Us</a>
+              <Link to="/about" className="block text-gray-700 hover:text-blue-600 transition-colors">About Us</Link>
               <Link to="/services" className="block text-gray-700 hover:text-blue-600 transition-colors">Our Services</Link>
               <Link to="/customers" className="block text-gray-700 hover:text-blue-600 transition-colors">Our Customers</Link>
               <Link to="/rental" className="block text-gray-700 hover:text-blue-600 transition-colors">Rental</Link>
-              <a href="#shop" className="block text-gray-700 hover:text-blue-600 transition-colors">Shop</a>
+              <Link to="/shop" className="block text-gray-700 hover:text-blue-600 transition-colors">Shop</Link>
               <Link to="/blog" className="block text-gray-700 hover:text-blue-600 transition-colors">Blog</Link>
               <Link to="/contact" className="block text-gray-700 hover:text-blue-600 transition-colors">Contact Us</Link>
             </div>

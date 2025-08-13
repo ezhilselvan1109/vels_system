@@ -173,12 +173,12 @@ const Footer = React.memo(() => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="flex flex-wrap justify-center md:justify-start gap-6 text-sm">
-            <a href="#about" className="hover:text-blue-400 transition-colors">About Us</a>
+            <Link to="/about" className="hover:text-blue-400 transition-colors">About Us</Link>
             <Link to="/services" className="hover:text-blue-400 transition-colors">Our Services</Link>
             <Link to="/contact" className="hover:text-blue-400 transition-colors">Contact Us</Link>
-            <a href="#account" className="hover:text-blue-400 transition-colors">My Account</a>
-            <a href="#checkout" className="hover:text-blue-400 transition-colors">Checkout</a>
-            <a href="#shop" className="hover:text-blue-400 transition-colors">Shop</a>
+            <Link to="/coming-soon" className="hover:text-blue-400 transition-colors">My Account</Link>
+            <Link to="/coming-soon" className="hover:text-blue-400 transition-colors">Checkout</Link>
+            <Link to="/shop" className="hover:text-blue-400 transition-colors">Shop</Link>
           </div>
           <div className="text-center md:text-right">
             <p className="text-sm text-gray-400">

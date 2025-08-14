@@ -5,6 +5,7 @@ import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import LoadingSpinner from './components/LoadingSpinner';
 import WhatsAppFAB from './components/WhatsAppFAB';
+import SignalBooster from './pages/SignalBooster';
 
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home'));
@@ -32,6 +33,18 @@ const DataRecovery = lazy(() => import('./pages/DataRecovery'));
 const DataStorage = lazy(() => import('./pages/DataStorage'));
 const Photocopier = lazy(() => import('./pages/Photocopier'));
 const WiFiAccessPoint = lazy(() => import('./pages/WiFiAccessPoint'));
+const CCTV = lazy(() => import('./pages/CCTV'));
+const DoorAccessControl = lazy(() => import('./pages/DoorAccessControl'));
+const BiometricSystem = lazy(() => import('./pages/BiometricSystem'));
+const Intercom = lazy(() => import('./pages/Intercom'));
+const BoomBarrier = lazy(() => import('./pages/BoomBarrier'));
+const MetalDetectorSignalJammer = lazy(() => import('./pages/MetalDetectorSignalJammer'));
+const VideoDoorPhone = lazy(() => import('./pages/VideoDoorPhone'));
+const CashCountingMachine = lazy(() => import('./pages/CashCountingMachine'));
+const BurglarAlarmSystem = lazy(() => import('./pages/BurglarAlarmSystem'));
+const GPSVehicleTracker = lazy(() => import('./pages/GPSVehicleTracker'));
+const SafetyLockers = lazy(() => import('./pages/SafetyLockers'));
+const FireAlarms = lazy(() => import('./pages/FireAlarms'));
 const ComingSoon = lazy(() => import('./pages/ComingSoon'));
 
 function App() {
@@ -68,6 +81,19 @@ function App() {
               <Route path="/data-storage" element={<DataStorage />} />
               <Route path="/photocopier" element={<Photocopier />} />
               <Route path="/wifi-access-point" element={<WiFiAccessPoint />} />
+              <Route path="/cctv" element={<CCTV />} />
+              <Route path="/door-access-control" element={<DoorAccessControl />} />
+              <Route path="/biometric-system" element={<BiometricSystem />} />
+              <Route path="/intercom" element={<Intercom />} />
+              <Route path="/boom-barrier" element={<BoomBarrier />} />
+              <Route path="/metal-detector-signal-jammer" element={<MetalDetectorSignalJammer />} />
+              <Route path="/video-door-phone" element={<VideoDoorPhone />} />
+              <Route path="/cash-counting-machine" element={<CashCountingMachine />} />
+              <Route path="/burglar-alarm-system" element={<BurglarAlarmSystem />}/>
+              <Route path="/gps-vehicle-tracker" element={<GPSVehicleTracker />} />
+              <Route path="/safety-lockers" element={<SafetyLockers />} />
+              <Route path="/fire-alarms" element={<FireAlarms />} />
+              <Route path="/signal-booster" element={<SignalBooster />} />
               <Route path="/coming-soon" element={<ComingSoon />} />
             </Routes>
           </Suspense>

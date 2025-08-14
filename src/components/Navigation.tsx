@@ -41,19 +41,19 @@ const Navigation = React.memo(() => {
   ];
 
   const securitySolutions = [
-    { title: 'CCTV Camera', href: '/coming-soon' },
-    { title: 'Door Access Control', href: '/coming-soon' },
-    { title: 'Biometric System', href: '/coming-soon' },
-    { title: 'Intercom', href: '/coming-soon' },
-    { title: 'Boom Barrier', href: '/coming-soon' },
-    { title: 'Metal Detector & Signal Jammer', href: '/coming-soon' },
-    { title: 'Signal Booster', href: '/coming-soon' },
-    { title: 'Video Door Phone', href: '/coming-soon' },
-    { title: 'Cash Counting Machine', href: '/coming-soon' },
-    { title: 'Fire Alarms', href: '/coming-soon' },
-    { title: 'Safety Lockers', href: '/coming-soon' },
-    { title: 'GPS Vehicle Tracker', href: '/coming-soon' },
-    { title: 'Burglar Alarm System', href: '/coming-soon' }
+    { title: 'CCTV Camera', href: '/cctv' },
+    { title: 'Door Access Control', href: '/door-access-control' },
+    { title: 'Biometric System', href: '/biometric-system' },
+    { title: 'Intercom', href: '/intercom' },
+    { title: 'Boom Barrier', href: '/boom-barrier' },
+    { title: 'Metal Detector & Signal Jammer', href: '/metal-detector-signal-jammer' },
+    { title: 'Signal Booster', href: '/signal-booster' },
+    { title: 'Video Door Phone', href: '/video-door-phone' },
+    { title: 'Cash Counting Machine', href: '/cash-counting-machine' },
+    { title: 'Fire Alarms', href: 'fire-alarms' },
+    { title: 'Safety Lockers', href: '/safety-lockers' },
+    { title: 'GPS Vehicle Tracker', href: '/gps-vehicle-tracker' },
+    { title: 'Burglar Alarm System', href: '/burglar-alarm-system' }
   ];
 
   return (

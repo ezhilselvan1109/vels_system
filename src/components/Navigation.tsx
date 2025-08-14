@@ -28,16 +28,16 @@ const Navigation = React.memo(() => {
     { title: 'Tablet', href: '/tablet' },
     { title: 'Software', href: '/software' },
     { title: 'Mobile Accessories', href: '/mobile-accessories' },
-    { title: 'Server & Workstation', href: '/coming-soon' },
-    { title: 'Network Hardware Solution', href: '/coming-soon' },
-    { title: 'Online & Offline UPS', href: '/coming-soon' },
-    { title: 'Firewall', href: '/coming-soon' },
-    { title: 'IT Peripherals', href: '/coming-soon' },
-    { title: 'WiFi Access Point', href: '/coming-soon' },
-    { title: 'Photocopier', href: '/coming-soon' },
-    { title: 'Data Storage', href: '/coming-soon' },
-    { title: 'Data Recovery', href: '/coming-soon' },
-    { title: 'Projector', href: '/coming-soon' }
+    { title: 'Server & Workstation', href: '/server' },
+    { title: 'Network Hardware Solution', href: '/network-hardware' },
+    { title: 'Online & Offline UPS', href: '/ups' },
+    { title: 'Firewall', href: '/firewall' },
+    { title: 'IT Peripherals', href: '/it-peripherals' },
+    { title: 'WiFi Access Point', href: '/wifi-access-point' },
+    { title: 'Photocopier', href: '/photocopier' },
+    { title: 'Data Storage', href: '/data-storage' },
+    { title: 'Data Recovery', href: '/data-recovery' },
+    { title: 'Projector', href: '/projector' }
   ];
 
   const securitySolutions = [
@@ -65,7 +65,7 @@ const Navigation = React.memo(() => {
             <div className="text-2xl font-bold text-blue-900">
               <Link to="/" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/' ? 'text-blue-600 font-medium' : ''}`}>
                 <img
-                  src="/vels-logo.png"
+                  src="/logo/vels-logo.png"
                   alt="logo"
                   className="h-10 w-auto object-contain"
                 />
@@ -73,17 +73,17 @@ const Navigation = React.memo(() => {
             </div>
             <div className="hidden md:flex gap-6">
               <img
-                src="/25_years_of_excellence_vel_systems-removebg-preview.png"
+                src="/logo/25_years_of_excellence_vel_systems-removebg-preview.png"
                 alt="25 Years Excellence"
                 className="h-7 w-auto object-contain"
               />
               <img
-                src="/gem-logo-1-1-300x143.png"
+                src="/logo/gem-logo-1-1-300x143.png"
                 alt="GEM Logo"
                 className="h-7 w-auto object-contain"
               />
               <img
-                src="/iso2015-1024x395-1.png"
+                src="/logo/iso2015-1024x395-1.png"
                 alt="ISO 2015"
                 className="h-7 w-auto object-contain"
               />
@@ -143,8 +143,8 @@ const Navigation = React.memo(() => {
             <Link to="/blog" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/blog' ? 'text-blue-600 font-medium' : ''}`}>
               Blog
             </Link>
-            <Link to="/power-solutions" className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors">
-              Contact Us
+            <Link to="/contact" className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors">
+              <span>Contact Us</span>
             </Link>
           </div>
 

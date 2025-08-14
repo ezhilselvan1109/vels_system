@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import LoadingSpinner from './components/LoadingSpinner';
+import WhatsAppFAB from './components/WhatsAppFAB';
 
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home'));
@@ -21,6 +22,16 @@ const Blog = lazy(() => import('./pages/Blog'));
 const Services = lazy(() => import('./pages/Services'));
 const Customers = lazy(() => import('./pages/Customers'));
 const Contact = lazy(() => import('./pages/Contact'));
+const Server = lazy(() => import('./pages/Server'));
+const NetworkHardware = lazy(() => import('./pages/NetworkHardware'));
+const UPS = lazy(() => import('./pages/UPS'));
+const Firewall = lazy(() => import('./pages/Firewall'));
+const ITPeripherals = lazy(() => import('./pages/ITPeripherals'));
+const Projector = lazy(() => import('./pages/Projector'));
+const DataRecovery = lazy(() => import('./pages/DataRecovery'));
+const DataStorage = lazy(() => import('./pages/DataStorage'));
+const Photocopier = lazy(() => import('./pages/Photocopier'));
+const WiFiAccessPoint = lazy(() => import('./pages/WiFiAccessPoint'));
 const ComingSoon = lazy(() => import('./pages/ComingSoon'));
 
 function App() {
@@ -47,11 +58,22 @@ function App() {
               <Route path="/services" element={<Services />} />
               <Route path="/customers" element={<Customers />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/server" element={<Server />} />
+              <Route path="/network-hardware" element={<NetworkHardware />} />
+              <Route path="/ups" element={<UPS />} />
+              <Route path="/firewall" element={<Firewall />} />
+              <Route path="/it-peripherals" element={<ITPeripherals />} />
+              <Route path="/projector" element={<Projector />} />
+              <Route path="/data-recovery" element={<DataRecovery />} />
+              <Route path="/data-storage" element={<DataStorage />} />
+              <Route path="/photocopier" element={<Photocopier />} />
+              <Route path="/wifi-access-point" element={<WiFiAccessPoint />} />
               <Route path="/coming-soon" element={<ComingSoon />} />
             </Routes>
           </Suspense>
         </main>
         <Footer />
+        <WhatsAppFAB />
       </div>
     </Router>
   );

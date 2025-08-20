@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { CartProvider } from './contexts/CartContext';
 import Header from './components/Header';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
@@ -46,62 +47,66 @@ const GPSVehicleTracker = lazy(() => import('./pages/GPSVehicleTracker'));
 const SafetyLockers = lazy(() => import('./pages/SafetyLockers'));
 const FireAlarms = lazy(() => import('./pages/FireAlarms'));
 const ComingSoon = lazy(() => import('./pages/ComingSoon'));
+const ProductDetail = lazy(() => import('./pages/ProductDetail'));
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-white">
-        <Header />
-        <Navigation />
-        <main>
-          <Suspense fallback={<LoadingSpinner />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/desktop" element={<Desktop />} />
-              <Route path="/laptop" element={<Laptop />} />
-              <Route path="/printer" element={<Printer />} />
-              <Route path="/tablet" element={<Tablet />} />
-              <Route path="/software" element={<Software />} />
-              <Route path="/mobile-accessories" element={<MobileAccessories />} />
-              <Route path="/power-solutions" element={<PowerSolutions />} />
-              <Route path="/shop" element={<Shop />} />
-              <Route path="/rental" element={<Rental />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/customers" element={<Customers />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/server" element={<Server />} />
-              <Route path="/network-hardware" element={<NetworkHardware />} />
-              <Route path="/ups" element={<UPS />} />
-              <Route path="/firewall" element={<Firewall />} />
-              <Route path="/it-peripherals" element={<ITPeripherals />} />
-              <Route path="/projector" element={<Projector />} />
-              <Route path="/data-recovery" element={<DataRecovery />} />
-              <Route path="/data-storage" element={<DataStorage />} />
-              <Route path="/photocopier" element={<Photocopier />} />
-              <Route path="/wifi-access-point" element={<WiFiAccessPoint />} />
-              <Route path="/cctv" element={<CCTV />} />
-              <Route path="/door-access-control" element={<DoorAccessControl />} />
-              <Route path="/biometric-system" element={<BiometricSystem />} />
-              <Route path="/intercom" element={<Intercom />} />
-              <Route path="/boom-barrier" element={<BoomBarrier />} />
-              <Route path="/metal-detector-signal-jammer" element={<MetalDetectorSignalJammer />} />
-              <Route path="/video-door-phone" element={<VideoDoorPhone />} />
-              <Route path="/cash-counting-machine" element={<CashCountingMachine />} />
-              <Route path="/burglar-alarm-system" element={<BurglarAlarmSystem />}/>
-              <Route path="/gps-vehicle-tracker" element={<GPSVehicleTracker />} />
-              <Route path="/safety-lockers" element={<SafetyLockers />} />
-              <Route path="/fire-alarms" element={<FireAlarms />} />
-              <Route path="/signal-booster" element={<SignalBooster />} />
-              <Route path="/coming-soon" element={<ComingSoon />} />
-            </Routes>
-          </Suspense>
-        </main>
-        <Footer />
-        <WhatsAppFAB />
-      </div>
-    </Router>
+    <CartProvider>
+      <Router>
+        <div className="min-h-screen bg-white">
+          <Header />
+          <Navigation />
+          <main>
+            <Suspense fallback={<LoadingSpinner />}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/desktop" element={<Desktop />} />
+                <Route path="/laptop" element={<Laptop />} />
+                <Route path="/printer" element={<Printer />} />
+                <Route path="/tablet" element={<Tablet />} />
+                <Route path="/software" element={<Software />} />
+                <Route path="/mobile-accessories" element={<MobileAccessories />} />
+                <Route path="/power-solutions" element={<PowerSolutions />} />
+                <Route path="/shop" element={<Shop />} />
+                <Route path="/rental" element={<Rental />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/customers" element={<Customers />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/server" element={<Server />} />
+                <Route path="/network-hardware" element={<NetworkHardware />} />
+                <Route path="/ups" element={<UPS />} />
+                <Route path="/firewall" element={<Firewall />} />
+                <Route path="/it-peripherals" element={<ITPeripherals />} />
+                <Route path="/projector" element={<Projector />} />
+                <Route path="/data-recovery" element={<DataRecovery />} />
+                <Route path="/data-storage" element={<DataStorage />} />
+                <Route path="/photocopier" element={<Photocopier />} />
+                <Route path="/wifi-access-point" element={<WiFiAccessPoint />} />
+                <Route path="/cctv" element={<CCTV />} />
+                <Route path="/door-access-control" element={<DoorAccessControl />} />
+                <Route path="/biometric-system" element={<BiometricSystem />} />
+                <Route path="/intercom" element={<Intercom />} />
+                <Route path="/boom-barrier" element={<BoomBarrier />} />
+                <Route path="/metal-detector-signal-jammer" element={<MetalDetectorSignalJammer />} />
+                <Route path="/video-door-phone" element={<VideoDoorPhone />} />
+                <Route path="/cash-counting-machine" element={<CashCountingMachine />} />
+                <Route path="/burglar-alarm-system" element={<BurglarAlarmSystem />}/>
+                <Route path="/gps-vehicle-tracker" element={<GPSVehicleTracker />} />
+                <Route path="/safety-lockers" element={<SafetyLockers />} />
+                <Route path="/fire-alarms" element={<FireAlarms />} />
+                <Route path="/signal-booster" element={<SignalBooster />} />
+                <Route path="/coming-soon" element={<ComingSoon />} />
+                <Route path="/shop/:id" element={<ProductDetail />} />
+              </Routes>
+            </Suspense>
+          </main>
+          <Footer />
+          <WhatsAppFAB />
+        </div>
+      </Router>
+    </CartProvider>
   );
 }
 

@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import CartIcon from './cart/CartIcon';
 
 const Navigation = React.memo(() => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -146,6 +147,7 @@ const Navigation = React.memo(() => {
             <Link to="/contact" className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors">
               <span>Contact Us</span>
             </Link>
+            <CartIcon />
           </div>
 
           {/* Mobile Menu Button */}

@@ -1,5 +1,31 @@
-import { AuthResponse, OTPRequest, OTPVerification } from '../types/auth';
-import { apiRequest } from './api';
+import { AuthResponse, OTPVerification } from '../types/auth';
+
+const API_BASE_URL = 'http://localhost:8080/api';
+
+// Generic API response handler
+const handleResponse = async (response: Response) => {
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ message: 'Network error' }));
+    throw new Error(error.message || `HTTP error! status: ${response.status}`);
+  }
+  return response.json();
+};
+
+// Generic API request function
+const apiRequest = async (endpoint: string, options: RequestInit = {}) => {
+  const url = `${API_BASE_URL}${endpoint}`;
+  const config: RequestInit = {
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+    ...options,
+  };
+
+  const response = await fetch(url, config);
+  return handleResponse(response);
+};
 
 export const authApi = {
   // Generate OTP
@@ -10,17 +36,9 @@ export const authApi = {
     });
   },
 
-  // Verify OTP for Sign In
-  verifySignInOTP: async (data: OTPVerification): Promise<AuthResponse> => {
-    return apiRequest('/auth/user/sign-in/verify-otp', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    });
-  },
-
-  // Verify OTP for Sign Up
-  verifySignUpOTP: async (data: OTPVerification): Promise<AuthResponse> => {
-    return apiRequest('/auth/user/sign-up/verify-otp', {
+  // Verify OTP for User
+  verifyUserOTP: async (data: OTPVerification): Promise<AuthResponse> => {
+    return apiRequest('/auth/user/verify-otp', {
       method: 'POST',
       body: JSON.stringify(data),
     });

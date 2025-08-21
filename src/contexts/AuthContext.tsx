@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { User, AuthContextType } from '../types/auth';
 import { authApi } from '../services/authApi';
 
@@ -34,26 +35,72 @@ const initialState: AuthState = {
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
+  const queryClient = useQueryClient();
 
-  const checkAuth = async () => {
-    try {
-      dispatch({ type: 'SET_LOADING', payload: true });
-      const response = await authApi.getCurrentUser();
-      if (response.success && response.data.user) {
-        dispatch({ type: 'SET_USER', payload: response.data.user });
-      } else {
-        dispatch({ type: 'SET_USER', payload: null });
-      }
-    } catch (error) {
+  // Check authentication status
+  const { data: authData, isLoading: authLoading } = useQuery({
+    queryKey: ['auth', 'me'],
+    queryFn: authApi.getCurrentUser,
+    retry: false,
+    refetchOnMount: true,
+    refetchOnWindowFocus: false,
+  });
+
+  // Update user state when auth data changes
+  useEffect(() => {
+    if (authData?.success && authData.data?.data) {
+      dispatch({ type: 'SET_USER', payload: authData.data.data });
+    } else {
       dispatch({ type: 'SET_USER', payload: null });
     }
-  };
+  }, [authData]);
+
+  // Update loading state
+  useEffect(() => {
+    dispatch({ type: 'SET_LOADING', payload: authLoading });
+  }, [authLoading]);
+
+  // Generate OTP mutation
+  const generateOTPMutation = useMutation({
+    mutationFn: authApi.generateOTP,
+    onError: (error) => {
+      console.error('Generate OTP failed:', error);
+    },
+  });
+
+  // Verify OTP mutation
+  const verifyOTPMutation = useMutation({
+    mutationFn: authApi.verifyUserOTP,
+    onSuccess: (response) => {
+      if (response.success) {
+        // Refetch user data after successful verification
+        queryClient.invalidateQueries({ queryKey: ['auth', 'me'] });
+      }
+    },
+    onError: (error) => {
+      console.error('Verify OTP failed:', error);
+    },
+  });
+
+  // Logout mutation
+  const logoutMutation = useMutation({
+    mutationFn: authApi.logout,
+    onSuccess: () => {
+      dispatch({ type: 'LOGOUT' });
+      queryClient.clear();
+    },
+    onError: () => {
+      // Even if logout fails on server, clear local state
+      dispatch({ type: 'LOGOUT' });
+      queryClient.clear();
+    },
+  });
 
   const generateOTP = async (email: string): Promise<string> => {
     try {
-      const response = await authApi.generateOTP(email);
-      if (response.success && response.data.requestId) {
-        return response.data.requestId;
+      const response = await generateOTPMutation.mutateAsync(email);
+      if (response.success && response.data?.data?.otpIdentifierInfo?.[0]?.requestId) {
+        return response.data.data.otpIdentifierInfo[0].requestId;
       }
       throw new Error(response.message || 'Failed to generate OTP');
     } catch (error) {
@@ -63,51 +110,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (email: string, otp: string, requestId: string) => {
     try {
-      dispatch({ type: 'SET_LOADING', payload: true });
-      const response = await authApi.verifySignInOTP({ email, otp, requestId });
-      if (response.success && response.data.user) {
-        dispatch({ type: 'SET_USER', payload: response.data.user });
-      } else {
+      const response = await verifyOTPMutation.mutateAsync({ email, otp, requestId });
+      if (!response.success) {
         throw new Error(response.message || 'Login failed');
       }
     } catch (error) {
-      dispatch({ type: 'SET_LOADING', payload: false });
       throw error;
     }
   };
 
   const signup = async (email: string, otp: string, requestId: string) => {
-    try {
-      dispatch({ type: 'SET_LOADING', payload: true });
-      const response = await authApi.verifySignUpOTP({ email, otp, requestId });
-      if (response.success && response.data.user) {
-        dispatch({ type: 'SET_USER', payload: response.data.user });
-      } else {
-        throw new Error(response.message || 'Signup failed');
-      }
-    } catch (error) {
-      dispatch({ type: 'SET_LOADING', payload: false });
-      throw error;
-    }
+    // For this API, signup and login use the same endpoint
+    return login(email, otp, requestId);
   };
 
   const logout = async () => {
-    try {
-      await authApi.logout();
-      dispatch({ type: 'LOGOUT' });
-    } catch (error) {
-      // Even if logout fails on server, clear local state
-      dispatch({ type: 'LOGOUT' });
-    }
+    await logoutMutation.mutateAsync();
   };
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
+  const checkAuth = async () => {
+    queryClient.invalidateQueries({ queryKey: ['auth', 'me'] });
+  };
 
   const value: AuthContextType = {
     user: state.user,
-    loading: state.loading,
+    loading: state.loading || generateOTPMutation.isPending || verifyOTPMutation.isPending,
     login,
     signup,
     logout,

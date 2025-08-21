@@ -1,9 +1,12 @@
 export interface User {
   id: string;
   email: string;
-  firstName: string;
-  lastName: string;
+  phoneNumber: string | null;
+  firstName: string | null;
+  lastName: string | null;
+  gender: string | null;
   role: string;
+  status: number;
   createdAt: string;
   updatedAt: string;
 }
@@ -15,6 +18,8 @@ export interface AuthResponse {
     user?: User;
     requestId?: string;
     token?: string;
+    message?: string;
+    data?: any;
   };
 }
 
@@ -36,4 +41,12 @@ export interface AuthContextType {
   logout: () => Promise<void>;
   generateOTP: (email: string) => Promise<string>;
   checkAuth: () => Promise<void>;
+}
+
+export interface LoginFormData {
+  identifier: string;
+}
+
+export interface OTPFormData {
+  otp: string;
 }

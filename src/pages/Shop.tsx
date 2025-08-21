@@ -92,7 +92,7 @@ const Shop = React.memo(() => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-12">
+      {/* <section className="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-12">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">
             Shop Our Products
@@ -101,7 +101,7 @@ const Shop = React.memo(() => {
             Discover our wide range of technology solutions
           </p>
         </div>
-      </section>
+      </section> */}
 
       {/* Search and Sort Bar */}
       <div className="bg-white shadow-sm border-b">

@@ -2,11 +2,16 @@ import React, { useState, useCallback } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import CartIcon from './cart/CartIcon';
+import UserMenu from './auth/UserMenu';
+import AuthModal from './auth/AuthModal';
+import { useAuth } from '../contexts/AuthContext';
 
 const Navigation = React.memo(() => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const location = useLocation();
+  const { user } = useAuth();
 
   const toggleMenu = useCallback(() => {
     setIsMenuOpen(prev => !prev);
@@ -58,7 +63,7 @@ const Navigation = React.memo(() => {
   ];
 
   return (
-    <nav className="bg-white shadow-lg sticky top-0 z-50">
+    <nav className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex flex-row lg:flex-col justify-between py-4">
           {/* Logo */}
@@ -147,7 +152,19 @@ const Navigation = React.memo(() => {
             <Link to="/contact" className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors">
               <span>Contact Us</span>
             </Link>
-            <CartIcon />
+            <div className="flex items-center space-x-4">
+              <CartIcon />
+              {user ? (
+                <UserMenu />
+              ) : (
+                <button
+                  onClick={() => setShowAuthModal(true)}
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+                >
+                  Login
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -211,10 +228,23 @@ const Navigation = React.memo(() => {
               <Link to="/shop" onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">Shop</Link>
               <Link to="/blog" onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">Blog</Link>
               <Link to="/contact" onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">Contact Us</Link>
+              {!user && (
+                <button
+                  onClick={() => {
+                    setShowAuthModal(true);
+                    setIsMenuOpen(false);
+                  }}
+                  className="w-full text-left bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+                >
+                  Login
+                </button>
+              )}
             </div>
           </div>
         )}
       </div>
+
+      <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
     </nav>
   );
 });

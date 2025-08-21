@@ -2,6 +2,31 @@ import { ProductsResponse, ProductResponse, CategoriesResponse, BrandsResponse, 
 
 const API_BASE_URL = 'http://localhost:8080/api';
 
+// Generic API response handler
+const handleResponse = async (response: Response) => {
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ message: 'Network error' }));
+    throw new Error(error.message || `HTTP error! status: ${response.status}`);
+  }
+  return response.json();
+};
+
+// Generic API request function
+const apiRequest = async (endpoint: string, options: RequestInit = {}) => {
+  const url = `${API_BASE_URL}${endpoint}`;
+  const config: RequestInit = {
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+    ...options,
+  };
+
+  const response = await fetch(url, config);
+  return handleResponse(response);
+};
+
 export const productApi = {
   // Filter products with pagination and sorting
   filterProducts: async (filters: ProductFilters): Promise<ProductsResponse> => {
@@ -16,37 +41,24 @@ export const productApi = {
     if (filters.sortBy) params.append('sortBy', filters.sortBy);
     if (filters.direction) params.append('direction', filters.direction);
 
-    const response = await fetch(`${API_BASE_URL}/products/filter?${params}`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch products');
-    }
-    return response.json();
+    return apiRequest(`/products/filter?${params}`);
   },
 
   // Get single product by ID
   getProductById: async (id: string): Promise<ProductResponse> => {
-    const response = await fetch(`${API_BASE_URL}/products/${id}`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch product');
-    }
-    return response.json();
+    return apiRequest(`/products/${id}`);
   },
 
   // Get categories hierarchy
   getCategories: async (): Promise<CategoriesResponse> => {
-    const response = await fetch(`${API_BASE_URL}/categories/hierarchy`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch categories');
-    }
-    return response.json();
+    return apiRequest('/categories/hierarchy');
   },
 
   // Get all brands
   getBrands: async (): Promise<BrandsResponse> => {
-    const response = await fetch(`${API_BASE_URL}/brands`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch brands');
-    }
-    return response.json();
+    return apiRequest('/brands');
   }
 };
+
+// Export the generic API request function for use in other services
+export { apiRequest };

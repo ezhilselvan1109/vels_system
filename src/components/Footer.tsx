@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { Facebook, Instagram, Youtube, MessageCircle, MapPin, Phone, Mail } from 'lucide-react';
 
 const customerImages = [
   '/customer/customer-1.jpeg',
@@ -178,21 +179,104 @@ const Footer = React.memo(() => {
       </div>
 
       {/* Footer Links */}
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <div className="flex flex-wrap justify-center md:justify-start gap-6 text-sm">
-            <Link to="/about" className="hover:text-blue-400 transition-colors">About Us</Link>
-            <Link to="/services" className="hover:text-blue-400 transition-colors">Our Services</Link>
-            <Link to="/contact" className="hover:text-blue-400 transition-colors">Contact Us</Link>
-            <Link to="/coming-soon" className="hover:text-blue-400 transition-colors">My Account</Link>
-            <Link to="/coming-soon" className="hover:text-blue-400 transition-colors">Checkout</Link>
-            <Link to="/shop" className="hover:text-blue-400 transition-colors">Shop</Link>
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* About Section */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">ABOUT</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/about" className="hover:text-blue-400 transition-colors">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="hover:text-blue-400 transition-colors">
+                  Contact Us
+                </Link>
+              </li>
+            </ul>
           </div>
-          <div className="text-center md:text-right">
-            <p className="text-sm text-gray-400">
-              © 2024 VEL SYSTEMS. All rights reserved.
-            </p>
+
+          {/* Social Links */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">SOCIAL</h3>
+            <div className="flex space-x-4">
+              <a 
+                href="https://facebook.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-blue-400 transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook size={20} />
+              </a>
+              <a 
+                href="https://instagram.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-pink-400 transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram size={20} />
+              </a>
+              <a 
+                href="https://youtube.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-red-400 transition-colors"
+                aria-label="YouTube"
+              >
+                <Youtube size={20} />
+              </a>
+              <a 
+                href="https://wa.me/916572263827" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-green-400 transition-colors"
+                aria-label="WhatsApp"
+              >
+                <MessageCircle size={20} />
+              </a>
+            </div>
           </div>
+
+          {/* Registered Office Address */}
+          <div className="lg:col-span-2">
+            <h3 className="text-lg font-semibold mb-4">REGISTERED OFFICE ADDRESS</h3>
+            <div className="flex items-start space-x-3">
+              <MapPin size={20} className="text-blue-400 mt-1 flex-shrink-0" />
+              <div>
+                <p className="text-sm leading-relaxed">
+                  NO.7, Varadhanar STREET,<br />
+                  VedHACHALA Nagar,<br />
+                  Chengalpattu, Tamil Nadu 603001
+                </p>
+              </div>
+            </div>
+            
+            <div className="mt-4 space-y-2">
+              <div className="flex items-center space-x-3">
+                <Phone size={16} className="text-blue-400" />
+                <a href="tel:+916572263827" className="text-sm hover:text-blue-400 transition-colors">
+                  +91 6572263827
+                </a>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Mail size={16} className="text-blue-400" />
+                <a href="mailto:sales@velsystems.in" className="text-sm hover:text-blue-400 transition-colors">
+                  sales@velsystems.in
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Copyright */}
+        <div className="border-t border-gray-700 mt-8 pt-8 text-center">
+          <p className="text-sm text-gray-400">
+            © 2024 VEL SYSTEMS. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

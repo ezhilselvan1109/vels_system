@@ -9,7 +9,7 @@ const MetalDetectorSignalJammer = React.memo(() => {
       id: 'essl-d1010s',
       title: 'eSSL D1010S',
       description: 'The eSSL D1010S is a precise metal detector with adjustable sensitivity and ergonomic design for comfortable use. It features LED indicators for clear feedback and is ideal for reliable security screening in various environments.',
-      image: '/metalDetector/essl_D1010S.png'
+      image: '/metalDetector/metal_detector_essl_D1010S.png'
     },
     {
       id: 'hikvision-isd-smg1118l',
@@ -61,11 +61,11 @@ const MetalDetectorSignalJammer = React.memo(() => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {metalDetectors.map((detector) => (
               <div key={detector.id} className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-                <div className="aspect-w-16 aspect-h-9 overflow-hidden">
-                  <img 
-                    src={detector.image} 
+                <div className="aspect-[16/9] flex items-center justify-center bg-gray-100">
+                  <img
+                    src={detector.image}
                     alt={detector.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                   />
                 </div>

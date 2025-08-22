@@ -75,11 +75,11 @@ const Photocopier = React.memo(() => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {photocopierTypes.map((photocopier) => (
               <div key={photocopier.id} className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-                <div className="aspect-w-16 aspect-h-9 overflow-hidden">
-                  <img 
-                    src={photocopier.image} 
+                <div className="aspect-[16/9] flex items-center justify-center bg-gray-100">
+                  <img
+                    src={photocopier.image}
                     alt={photocopier.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                   />
                 </div>

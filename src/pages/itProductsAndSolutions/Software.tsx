@@ -40,11 +40,11 @@ const Software = React.memo(() => {
 
   const SoftwareCard = ({ software }: { software: any }) => (
     <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-      <div className="aspect-w-16 aspect-h-9 overflow-hidden">
-        <img 
-          src={software.image} 
+      <div className="aspect-[16/9] flex items-center justify-center bg-gray-100">
+        <img
+          src={software.image}
           alt={software.title}
-          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-300"
           loading="lazy"
         />
       </div>
@@ -52,7 +52,7 @@ const Software = React.memo(() => {
         <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors text-center">
           {software.title}
         </h3>
-        <button 
+        <button
           onClick={handleShopClick}
           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors duration-300 transform hover:scale-[1.02]"
         >
@@ -96,7 +96,7 @@ const Software = React.memo(() => {
             </h2>
             <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
           </div>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {tallySoftware.map((software) => (
               <SoftwareCard key={software.id} software={software} />

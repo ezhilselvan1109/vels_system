@@ -65,7 +65,7 @@ const Navigation = React.memo(() => {
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col lg:flex-col justify-between gap-2 py-2">
+        <div className="flex flex-col lg:flex-col justify-between gap-2 py-3">
           {/* Logo */}
           <div className="flex justify-between items-center space-x-4">
             <div className="text-2xl font-bold text-blue-900">

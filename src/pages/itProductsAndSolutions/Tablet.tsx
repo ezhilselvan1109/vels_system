@@ -48,11 +48,11 @@ const Tablet = React.memo(() => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {tabletBrands.map((tablet) => (
               <div key={tablet.id} className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-                <div className="aspect-w-16 aspect-h-9 overflow-hidden">
-                  <img 
-                    src={tablet.image} 
+                <div className="aspect-[16/9] flex items-center justify-center bg-gray-100">
+                  <img
+                    src={tablet.image}
                     alt={tablet.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                   />
                 </div>
@@ -63,7 +63,7 @@ const Tablet = React.memo(() => {
                   <p className="text-gray-600 leading-relaxed mb-4">
                     {tablet.description}
                   </p>
-                  <button 
+                  <button
                     onClick={handleShopClick}
                     className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors duration-300 transform hover:scale-[1.02]"
                   >
@@ -85,12 +85,12 @@ const Tablet = React.memo(() => {
             </h2>
             <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-md mx-auto">
             {authorizedPartners.map((partner, index) => (
               <div key={index} className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300 flex items-center justify-center">
-                <img 
-                  src={partner.image} 
+                <img
+                  src={partner.image}
                   alt={partner.name}
                   className="max-h-16 w-auto object-contain"
                   loading="lazy"

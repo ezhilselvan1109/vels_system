@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Save, Edit2, Mail, Phone, User, ArrowLeft } from 'lucide-react';
 import { toast } from 'react-toastify';
-import { useAuth } from '../../contexts/AuthContext';
-import { accountApi, UpdatePersonalInfoRequest, EmailUpdateRequest, PhoneUpdateRequest } from '../../services/accountApi';
+import { 
+  useAccountInfo, 
+  useUpdatePersonalInfo, 
+  useRequestEmailOTP, 
+  useVerifyEmailOTP, 
+  useRequestPhoneOTP, 
+  useVerifyPhoneOTP,
+  UpdatePersonalInfoRequest, 
+  EmailUpdateRequest, 
+  PhoneUpdateRequest 
+} from '../../hooks/useAccount';
 
 const personalInfoSchema = yup.object({
   firstName: yup
@@ -50,8 +58,6 @@ type EditMode = 'none' | 'personal' | 'email' | 'phone';
 type OTPStep = 'request' | 'verify';
 
 const ProfileSettings = React.memo(() => {
-  const { user } = useAuth();
-  const queryClient = useQueryClient();
   const [editMode, setEditMode] = useState<EditMode>('none');
   const [otpStep, setOtpStep] = useState<OTPStep>('request');
   const [otpRequestId, setOtpRequestId] = useState('');
@@ -59,11 +65,14 @@ const ProfileSettings = React.memo(() => {
   const [pendingPhone, setPendingPhone] = useState('');
 
   // Fetch account information
-  const { data: accountData, isLoading: accountLoading } = useQuery({
-    queryKey: ['account', 'info'],
-    queryFn: accountApi.getAccountInfo,
-    enabled: !!user,
-  });
+  const { data: accountData, isLoading: accountLoading } = useAccountInfo();
+  
+  // Mutations
+  const updatePersonalInfoMutation = useUpdatePersonalInfo();
+  const requestEmailOTPMutation = useRequestEmailOTP();
+  const verifyEmailOTPMutation = useVerifyEmailOTP();
+  const requestPhoneOTPMutation = useRequestPhoneOTP();
+  const verifyPhoneOTPMutation = useVerifyPhoneOTP();
 
   const accountInfo = accountData?.data;
 
@@ -119,98 +128,50 @@ const ProfileSettings = React.memo(() => {
   }, [accountInfo, personalInfoForm, emailForm, phoneForm]);
 
   // Update personal info mutation
-  const updatePersonalInfoMutation = useMutation({
-    mutationFn: accountApi.updatePersonalInfo,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['account', 'info'] });
-      queryClient.invalidateQueries({ queryKey: ['auth', 'me'] });
-      setEditMode('none');
-      toast.success('Personal information updated successfully!');
-    },
-    onError: (error: Error) => {
-      toast.error(error.message || 'Failed to update personal information');
-    },
-  });
-
-  // Email OTP request mutation
-  const requestEmailOTPMutation = useMutation({
-    mutationFn: accountApi.requestEmailOTP,
-    onSuccess: (response) => {
-      if (response.data?.otpIdentifierInfo?.[0]?.requestId) {
-        setOtpRequestId(response.data.otpIdentifierInfo[0].requestId);
-        setOtpStep('verify');
-        toast.success('OTP sent to your new email address');
-      }
-    },
-    onError: (error: Error) => {
-      toast.error(error.message || 'Failed to send OTP');
-    },
-  });
-
-  // Email OTP verify mutation
-  const verifyEmailOTPMutation = useMutation({
-    mutationFn: accountApi.verifyEmailOTP,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['account', 'info'] });
-      queryClient.invalidateQueries({ queryKey: ['auth', 'me'] });
-      setEditMode('none');
-      setOtpStep('request');
-      setPendingEmail('');
-      setOtpRequestId('');
-      otpForm.reset();
-      toast.success('Email updated successfully!');
-    },
-    onError: (error: Error) => {
-      toast.error(error.message || 'Failed to verify OTP');
-    },
-  });
-
-  // Phone OTP request mutation
-  const requestPhoneOTPMutation = useMutation({
-    mutationFn: accountApi.requestPhoneOTP,
-    onSuccess: (response) => {
-      if (response.data?.otpIdentifierInfo?.[0]?.requestId) {
-        setOtpRequestId(response.data.otpIdentifierInfo[0].requestId);
-        setOtpStep('verify');
-        toast.success('OTP sent to your new phone number');
-      }
-    },
-    onError: (error: Error) => {
-      toast.error(error.message || 'Failed to send OTP');
-    },
-  });
-
-  // Phone OTP verify mutation
-  const verifyPhoneOTPMutation = useMutation({
-    mutationFn: accountApi.verifyPhoneOTP,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['account', 'info'] });
-      queryClient.invalidateQueries({ queryKey: ['auth', 'me'] });
-      setEditMode('none');
-      setOtpStep('request');
-      setPendingPhone('');
-      setOtpRequestId('');
-      otpForm.reset();
-      toast.success('Phone number updated successfully!');
-    },
-    onError: (error: Error) => {
-      toast.error(error.message || 'Failed to verify OTP');
-    },
-  });
 
   // Handlers
   const handlePersonalInfoSubmit = (data: UpdatePersonalInfoRequest) => {
-    updatePersonalInfoMutation.mutate(data);
+    updatePersonalInfoMutation.mutate(data, {
+      onSuccess: () => {
+        setEditMode('none');
+        toast.success('Personal information updated successfully!');
+      },
+      onError: (error: Error) => {
+        toast.error(error.message || 'Failed to update personal information');
+      },
+    });
   };
 
   const handleEmailSubmit = (data: EmailUpdateRequest) => {
     setPendingEmail(data.newEmail);
-    requestEmailOTPMutation.mutate(data);
+    requestEmailOTPMutation.mutate(data, {
+      onSuccess: (response) => {
+        if (response.data?.otpIdentifierInfo?.[0]?.requestId) {
+          setOtpRequestId(response.data.otpIdentifierInfo[0].requestId);
+          setOtpStep('verify');
+          toast.success('OTP sent to your new email address');
+        }
+      },
+      onError: (error: Error) => {
+        toast.error(error.message || 'Failed to send OTP');
+      },
+    });
   };
 
   const handlePhoneSubmit = (data: PhoneUpdateRequest) => {
     setPendingPhone(data.newPhoneNumber);
-    requestPhoneOTPMutation.mutate(data);
+    requestPhoneOTPMutation.mutate(data, {
+      onSuccess: (response) => {
+        if (response.data?.otpIdentifierInfo?.[0]?.requestId) {
+          setOtpRequestId(response.data.otpIdentifierInfo[0].requestId);
+          setOtpStep('verify');
+          toast.success('OTP sent to your new phone number');
+        }
+      },
+      onError: (error: Error) => {
+        toast.error(error.message || 'Failed to send OTP');
+      },
+    });
   };
 
   const handleEmailOTPSubmit = (data: { otp: string }) => {
@@ -218,6 +179,18 @@ const ProfileSettings = React.memo(() => {
       identifier: pendingEmail,
       otp: data.otp,
       requestId: otpRequestId,
+    }, {
+      onSuccess: () => {
+        setEditMode('none');
+        setOtpStep('request');
+        setPendingEmail('');
+        setOtpRequestId('');
+        otpForm.reset();
+        toast.success('Email updated successfully!');
+      },
+      onError: (error: Error) => {
+        toast.error(error.message || 'Failed to verify OTP');
+      },
     });
   };
 
@@ -226,6 +199,18 @@ const ProfileSettings = React.memo(() => {
       identifier: pendingPhone,
       otp: data.otp,
       requestId: otpRequestId,
+    }, {
+      onSuccess: () => {
+        setEditMode('none');
+        setOtpStep('request');
+        setPendingPhone('');
+        setOtpRequestId('');
+        otpForm.reset();
+        toast.success('Phone number updated successfully!');
+      },
+      onError: (error: Error) => {
+        toast.error(error.message || 'Failed to verify OTP');
+      },
     });
   };
 

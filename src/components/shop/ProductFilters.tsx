@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, ChevronRight, X } from 'lucide-react';
 import { Category, Brand, ProductFilters } from '../../types/product';
-import { productApi } from '../../services/api';
+import { useCategories, useBrands } from '../../hooks/useProducts';
 
 interface ProductFiltersProps {
   filters: ProductFilters;
@@ -10,16 +10,16 @@ interface ProductFiltersProps {
 }
 
 const ProductFiltersComponent = React.memo(({ filters, onFiltersChange, onClearFilters }: ProductFiltersProps) => {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [brands, setBrands] = useState<Brand[]>([]);
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
   const [selectedBrands, setSelectedBrands] = useState<Set<string>>(new Set());
   const [priceRange, setPriceRange] = useState({ min: 0, max: 100000 });
 
-  useEffect(() => {
-    loadCategories();
-    loadBrands();
-  }, []);
+  // Use React Query hooks
+  const { data: categoriesData } = useCategories();
+  const { data: brandsData } = useBrands();
+  
+  const categories = categoriesData?.data || [];
+  const brands = brandsData?.data || [];
 
   useEffect(() => {
     if (filters.brandId) {
@@ -27,23 +27,6 @@ const ProductFiltersComponent = React.memo(({ filters, onFiltersChange, onClearF
     }
   }, [filters.brandId]);
 
-  const loadCategories = async () => {
-    try {
-      const response = await productApi.getCategories();
-      setCategories(response.data);
-    } catch (error) {
-      console.error('Failed to load categories:', error);
-    }
-  };
-
-  const loadBrands = async () => {
-    try {
-      const response = await productApi.getBrands();
-      setBrands(response.data);
-    } catch (error) {
-      console.error('Failed to load brands:', error);
-    }
-  };
 
   const toggleCategory = (categoryId: string) => {
     const newExpanded = new Set(expandedCategories);

@@ -1,9 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
 import { User, ChevronDown, Package, Star, Settings, LogOut, Mail, Phone } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
-import { accountApi } from '../../services/accountApi';
+import { useAccountInfo } from '../../hooks/useAccount';
 
 const UserMenu = React.memo(() => {
   const { user, logout } = useAuth();
@@ -11,11 +10,7 @@ const UserMenu = React.memo(() => {
   const menuRef = useRef<HTMLDivElement>(null);
 
   // Fetch account information
-  const { data: accountData } = useQuery({
-    queryKey: ['account', 'info'],
-    queryFn: accountApi.getAccountInfo,
-    enabled: !!user,
-  });
+  const { data: accountData } = useAccountInfo();
 
   const accountInfo = accountData?.data;
 
@@ -48,6 +43,12 @@ const UserMenu = React.memo(() => {
     }
     return 'User';
   };
+  const getFirstName = () => {
+    if (accountInfo?.firstName) {
+      return accountInfo.firstName;
+    }
+    return 'User';
+  };
 
   const getInitials = () => {
     const name = getDisplayName();
@@ -65,7 +66,7 @@ const UserMenu = React.memo(() => {
         <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold">
           {getInitials()}
         </div>
-        {/* <span className="hidden md:block font-medium">{getDisplayName()}</span> */}
+        <span className="hidden md:block font-medium">{getFirstName()}</span>
         <ChevronDown size={16} className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
@@ -127,10 +128,6 @@ const UserMenu = React.memo(() => {
           <div className="border-t bg-gray-50 p-4">
             <div className="text-xs text-gray-500 mb-2">Account Details</div>
             <div className="space-y-1 text-sm">
-              <div className="flex justify-between">
-                <span className="text-gray-600">Role:</span>
-                <span className="font-medium capitalize">{user.role.toLowerCase()}</span>
-              </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Member since:</span>
                 <span className="font-medium">

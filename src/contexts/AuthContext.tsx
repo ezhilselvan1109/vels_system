@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { User, AuthContextType } from '../types/auth';
-import { authApi } from '../services/authApi';
+import { useCurrentUser, useGenerateOTP, useVerifyOTP, useLogout } from '../hooks/useAuth';
 
 type AuthState = {
   user: User | null;
@@ -36,15 +36,13 @@ const initialState: AuthState = {
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
   const queryClient = useQueryClient();
+  
+  // Use custom hooks
+  const { data: authData, isLoading: authLoading } = useCurrentUser();
+  const generateOTPMutation = useGenerateOTP();
+  const verifyOTPMutation = useVerifyOTP();
+  const logoutMutation = useLogout();
 
-  // Check authentication status
-  const { data: authData, isLoading: authLoading } = useQuery({
-    queryKey: ['auth', 'me'],
-    queryFn: authApi.getCurrentUser,
-    retry: false,
-    refetchOnMount: true,
-    refetchOnWindowFocus: false,
-  });
 
   // Update user state when auth data changes
   useEffect(() => {
@@ -60,41 +58,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     dispatch({ type: 'SET_LOADING', payload: authLoading });
   }, [authLoading]);
 
-  // Generate OTP mutation
-  const generateOTPMutation = useMutation({
-    mutationFn: authApi.generateOTP,
-    onError: (error) => {
-      console.error('Generate OTP failed:', error);
-    },
-  });
-
-  // Verify OTP mutation
-  const verifyOTPMutation = useMutation({
-    mutationFn: authApi.verifyUserOTP,
-    onSuccess: (response) => {
-      if (response.success) {
-        // Refetch user data after successful verification
-        queryClient.invalidateQueries({ queryKey: ['auth', 'me'] });
-      }
-    },
-    onError: (error) => {
-      console.error('Verify OTP failed:', error);
-    },
-  });
-
-  // Logout mutation
-  const logoutMutation = useMutation({
-    mutationFn: authApi.logout,
-    onSuccess: () => {
-      dispatch({ type: 'LOGOUT' });
-      queryClient.clear();
-    },
-    onError: () => {
-      // Even if logout fails on server, clear local state
-      dispatch({ type: 'LOGOUT' });
-      queryClient.clear();
-    },
-  });
 
   const generateOTP = async (email: string): Promise<string> => {
     try {
@@ -129,7 +92,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const checkAuth = async () => {
-    queryClient.invalidateQueries({ queryKey: ['auth', 'me'] });
+    queryClient.invalidateQueries({ queryKey: ['auth-me'] });
   };
 
   const value: AuthContextType = {

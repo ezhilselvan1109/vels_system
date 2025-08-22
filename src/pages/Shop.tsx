@@ -1,22 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Search, Filter, SortAsc } from 'lucide-react';
-import { productApi } from '../services/api';
+import { useProducts, useCategories, useBrands } from '../hooks/useProducts';
 import ProductFilters from '../components/shop/ProductFilters';
 import ProductGrid from '../components/shop/ProductGrid';
 import Pagination from '../components/shop/Pagination';
-import { Product , ProductFilters as ProductFiltersType} from '../types/products';
+import { ProductFilters as ProductFiltersType} from '../types/products';
 
 const Shop = React.memo(() => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [pagination, setPagination] = useState({
-    currentPage: 0,
-    totalPages: 0,
-    totalElements: 0,
-    pageSize: 12
-  });
   
   const [filters, setFilters] = useState<ProductFiltersType>({
     page: 0,
@@ -26,28 +18,21 @@ const Shop = React.memo(() => {
     status: 'ACTIVE'
   });
 
-  const loadProducts = useCallback(async () => {
-    setLoading(true);
-    try {
-      const response = await productApi.filterProducts(filters);
-      setProducts(response.data.content);
-      setPagination({
-        currentPage: response.data.number,
-        totalPages: response.data.totalPages,
-        totalElements: response.data.totalElements,
-        pageSize: response.data.size
-      });
-    } catch (error) {
-      console.error('Failed to load products:', error);
-      setProducts([]);
-    } finally {
-      setLoading(false);
-    }
-  }, [filters]);
-
-  useEffect(() => {
-    loadProducts();
-  }, [loadProducts]);
+  // Use React Query hooks
+  const { data: productsData, isLoading: loading } = useProducts(filters);
+  
+  const products = productsData?.data.content || [];
+  const pagination = productsData?.data ? {
+    currentPage: productsData.data.number,
+    totalPages: productsData.data.totalPages,
+    totalElements: productsData.data.totalElements,
+    pageSize: productsData.data.size
+  } : {
+    currentPage: 0,
+    totalPages: 0,
+    totalElements: 0,
+    pageSize: 12
+  };
 
   const handleFiltersChange = useCallback((newFilters: ProductFiltersType) => {
     setFilters(newFilters);

@@ -93,12 +93,25 @@ const Navigation = React.memo(() => {
                 alt="ISO 2015"
                 className="h-7 w-auto object-contain"
               />
+              <div className="flex items-center space-x-4">
+                <CartIcon />
+                {user ? (
+                  <UserMenu />
+                ) : (
+                  <button
+                    onClick={() => setShowAuthModal(true)}
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+                  >
+                    Login
+                  </button>
+                )}
+              </div>
             </div>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center justify-between space-x-2">
-             <Link to="/power-solutions" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/about' ? 'text-blue-600 font-medium' : ''}`}>
+            <Link to="/power-solutions" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/about' ? 'text-blue-600 font-medium' : ''}`}>
               Power Solutions
             </Link>
             <div className="relative group">
@@ -152,19 +165,6 @@ const Navigation = React.memo(() => {
             <Link to="/contact" className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors">
               <span>Contact Us</span>
             </Link>
-            <div className="flex items-center space-x-4">
-              <CartIcon />
-              {user ? (
-                <UserMenu />
-              ) : (
-                <button
-                  onClick={() => setShowAuthModal(true)}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
-                >
-                  Login
-                </button>
-              )}
-            </div>
           </div>
 
           {/* Mobile Menu Button */}

@@ -1,38 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ShoppingCart, Truck, Shield, RefreshCw, Check } from 'lucide-react';
-import { productApi } from '../services/api';
+import { useProduct } from '../hooks/useProducts';
 import { useCart } from '../contexts/CartContext';
-import { Product } from '../types/products';
+import { Product } from '../types/product';
 
 const ProductDetail = React.memo(() => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { addToCart, isInCart, getCartItemQuantity } = useCart();
-  const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState(true);
   const [selectedVariant, setSelectedVariant] = useState(0);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [addingToCart, setAddingToCart] = useState(false);
 
-  useEffect(() => {
-    if (id) {
-      loadProduct(id);
-    }
-  }, [id]);
-
-  const loadProduct = async (productId: string) => {
-    setLoading(true);
-    try {
-      const response = await productApi.getProductById(productId);
-      setProduct(response.data);
-    } catch (error) {
-      console.error('Failed to load product:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Use React Query hook
+  const { data: productData, isLoading: loading } = useProduct(id || '');
+  const product = productData?.data;
 
   const handleBack = () => {
     navigate('/shop');

@@ -17,10 +17,9 @@ const slides: Slide[] = [
     title: "25+ YEARS OF EXPERIENCE",
     subtitle: "Focus on Your Business",
     description: "Far, far away, beyond the whispering word mountains and far from the lands of Vokalia and Consonantia, there lie the silent blind texts. Long forgotten, they linger in Bookmarksgrove a quiet haven nestled at the fading edge of the vast and dreaming Semantics Ocean.",
-    buttonText: "Read More"
   },
   {
-    title: "25 YEARS OF EXPERIENCE",
+    title: "25+ YEARS OF EXPERIENCE",
     subtitle: "Customers",
     description: "20,000 customers and 500+ corporate partners choose VEL Systems because results matter.",
     stats: {
@@ -29,7 +28,7 @@ const slides: Slide[] = [
     }
   },
   {
-    title: "25 YEARS OF EXPERIENCE",
+    title: "25+ YEARS OF EXPERIENCE",
     subtitle: "Customer Satisfaction is our Breath",
     description: "Our job doesn't end when you buy it begins. With VEL SYSTEMS, you get support that stays, long after the sale."
   },

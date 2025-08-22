@@ -65,7 +65,7 @@ const Navigation = React.memo(() => {
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col lg:flex-col justify-between py-4">
+        <div className="flex flex-col lg:flex-col justify-between gap-2 py-2">
           {/* Logo */}
           <div className="flex justify-between items-center space-x-4">
             <div className="text-2xl font-bold text-blue-900">
@@ -111,7 +111,7 @@ const Navigation = React.memo(() => {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center justify-between space-x-2">
-            <Link to="/power-solutions" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/about' ? 'text-blue-600 font-medium' : ''}`}>
+            <Link to="/power-solutions" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/power-solutions' ? 'text-blue-600 font-medium' : ''}`}>
               Power Solutions
             </Link>
             <div className="relative group">
@@ -119,7 +119,7 @@ const Navigation = React.memo(() => {
                 <span>IT Products & Solutions</span>
                 <ChevronDown size={16} />
               </button>
-              <div className="absolute left-0 mt-2 w-80 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+              <div className="absolute left-0 mt-2 w-80 bg-white rounded-b-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                 <div className="grid grid-cols-2 gap-2 p-4">
                   {itProducts.map((product, index) => (
                     <Link key={index} to={product.href} className="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded transition-colors">
@@ -134,7 +134,7 @@ const Navigation = React.memo(() => {
                 <span>Security Solutions</span>
                 <ChevronDown size={16} />
               </button>
-              <div className="absolute left-0 mt-2 w-80 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+              <div className="absolute left-0 mt-2 w-80 bg-white rounded-b-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                 <div className="grid grid-cols-2 gap-2 p-4">
                   {securitySolutions.map((solution, index) => (
                     <Link key={index} to={solution.href} className="block px-3 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded transition-colors">
@@ -162,8 +162,8 @@ const Navigation = React.memo(() => {
             <Link to="/blog" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/blog' ? 'text-blue-600 font-medium' : ''}`}>
               Blog
             </Link>
-            <Link to="/contact" className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors">
-              <span>Contact Us</span>
+            <Link to="/contact" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/contact' ? 'text-blue-600 font-medium' : ''}`}>
+              Contact Us
             </Link>
           </div>
 

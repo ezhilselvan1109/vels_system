@@ -142,9 +142,9 @@ const Footer = React.memo(() => {
   }, [index]);
 
   return (
-    <footer className="bg-gray-900 text-white pt-16 pb-8">
+    <footer className="bg-gray-900 text-white pt-8 pb-8">
       {/* Customer Images Carousel */}
-      <div className="container mx-auto px-4 mb-12">
+      {/* <div className="container mx-auto px-4 mb-12">
         <h3 className="text-2xl font-bold text-center mb-8">Our Valued Customers</h3>
         <div className="relative max-w-6xl mx-auto">
           <div 
@@ -176,10 +176,10 @@ const Footer = React.memo(() => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Footer Links */}
-      <div className="container mx-auto px-4 pt-8">
+      <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* About Section */}
           <div>

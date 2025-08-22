@@ -52,10 +52,31 @@ const Orders = React.memo(() => {
     }
   };
 
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'delivered':
+        return 'bg-green-100 text-green-800';
+      case 'processing':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'cancelled':
+        return 'bg-red-100 text-red-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
+    }
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-md">
-      <div className="p-6 border-b">
-        <h2 className="text-xl font-semibold text-gray-900">My Orders</h2>
+    <div className="bg-white rounded-xl shadow-md">
+      <div className="p-6 border-b bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div className="flex items-center space-x-3">
+          <div className="p-3 bg-blue-100 rounded-xl">
+            <Package className="w-5 h-5 text-blue-600" />
+          </div>
+          <div>
+            <h2 className="text-xl font-semibold text-gray-900">My Orders</h2>
+            <p className="text-sm text-gray-600">Track and manage your orders</p>
+          </div>
+        </div>
       </div>
 
       <div className="p-6">
@@ -68,7 +89,7 @@ const Orders = React.memo(() => {
         ) : (
           <div className="space-y-6">
             {orders.map((order) => (
-              <div key={order.id} className="border border-gray-200 rounded-lg p-6">
+              <div key={order.id} className="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow duration-200">
                 <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900">
@@ -78,15 +99,15 @@ const Orders = React.memo(() => {
                       Placed on {new Date(order.date).toLocaleDateString()}
                     </p>
                   </div>
-                  <div className="flex items-center space-x-2 mt-2 md:mt-0">
+                  <div className={`flex items-center space-x-2 mt-2 md:mt-0 px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(order.status)}`}>
                     {getStatusIcon(order.status)}
-                    <span className="font-medium text-gray-900">
+                    <span>
                       {getStatusText(order.status)}
                     </span>
                   </div>
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-3 bg-gray-50 p-4 rounded-lg">
                   {order.items.map((item, index) => (
                     <div key={index} className="flex justify-between items-center">
                       <div>
@@ -100,13 +121,22 @@ const Orders = React.memo(() => {
                   ))}
                 </div>
 
-                <div className="border-t pt-4 mt-4">
+                <div className="border-t pt-4 mt-4 bg-white">
                   <div className="flex justify-between items-center">
                     <span className="text-lg font-semibold text-gray-900">Total:</span>
                     <span className="text-lg font-bold text-blue-600">
                       ₹{order.total.toLocaleString()}
                     </span>
                   </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-3 mt-4">
+                  <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
+                    View Details
+                  </button>
+                  <button className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg transition-colors">
+                    Track Order
+                  </button>
                 </div>
               </div>
             ))}

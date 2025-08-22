@@ -1,10 +1,11 @@
 import React from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
-import { Package, Star, Settings } from 'lucide-react';
+import { Package, Star, Settings, MapPin } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import ProfileSettings from './profile/ProfileSettings';
 import Orders from './profile/Orders';
 import Reviews from './profile/Reviews';
+import Addresses from './profile/Addresses';
 
 const Profile = React.memo(() => {
   const { user } = useAuth();
@@ -14,6 +15,7 @@ const Profile = React.memo(() => {
     { path: '/profile', label: 'Profile Settings', icon: Settings, exact: true },
     { path: '/profile/orders', label: 'My Orders', icon: Package },
     { path: '/profile/reviews', label: 'My Reviews', icon: Star },
+    { path: '/profile/addresses', label: 'My Addresses', icon: MapPin },
   ];
 
   if (!user) return null;
@@ -21,11 +23,11 @@ const Profile = React.memo(() => {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
           {/* Enhanced Sidebar */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-xl shadow-md overflow-hidden">
-              <div className="p-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+              <div className="p-4 bg-gradient-to-r bg-blue-600 text-white">
                 <h3 className="font-semibold">Account Menu</h3>
               </div>
               <nav className="space-y-1 p-2">
@@ -55,11 +57,12 @@ const Profile = React.memo(() => {
           </div>
 
           {/* Content */}
-          <div className="lg:col-span-3">
+          <div className="xl:col-span-3">
             <Routes>
               <Route path="/" element={<ProfileSettings />} />
               <Route path="/orders" element={<Orders />} />
               <Route path="/reviews" element={<Reviews />} />
+              <Route path="/addresses" element={<Addresses />} />
             </Routes>
           </div>
         </div>

@@ -248,19 +248,22 @@ const ProfileSettings = React.memo(() => {
   return (
     <div className="space-y-6">
       {/* Personal Information */}
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="bg-white rounded-xl shadow-md overflow-hidden">
         <div className="p-6 border-b bg-gradient-to-r from-blue-50 to-indigo-50">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-blue-100 rounded-lg">
+              <div className="p-3 bg-blue-100 rounded-xl">
                 <User className="w-5 h-5 text-blue-600" />
               </div>
-              <h2 className="text-xl font-semibold text-gray-900">Personal Information</h2>
+              <div>
+                <h2 className="text-xl font-semibold text-gray-900">Personal Information</h2>
+                <p className="text-sm text-gray-600">Manage your personal details</p>
+              </div>
             </div>
             {editMode !== 'personal' && (
               <button
                 onClick={() => setEditMode('personal')}
-                className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 transition-colors bg-white px-3 py-2 rounded-lg shadow-sm hover:shadow-md"
+                className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 transition-colors bg-white px-4 py-2 rounded-lg shadow-sm hover:shadow-md"
               >
                 <Edit2 size={16} />
                 <span>Edit</span>
@@ -332,7 +335,7 @@ const ProfileSettings = React.memo(() => {
                 <button
                   type="submit"
                   disabled={updatePersonalInfoMutation.isPending}
-                  className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                  className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-3 px-6 rounded-xl transition-colors shadow-md hover:shadow-lg"
                 >
                   <Save size={16} />
                   <span>{updatePersonalInfoMutation.isPending ? 'Saving...' : 'Save Changes'}</span>
@@ -340,7 +343,7 @@ const ProfileSettings = React.memo(() => {
                 <button
                   type="button"
                   onClick={handleCancel}
-                  className="flex items-center space-x-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-colors"
+                  className="flex items-center space-x-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-xl transition-colors"
                 >
                   <span>Cancel</span>
                 </button>
@@ -349,18 +352,18 @@ const ProfileSettings = React.memo(() => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
-                <div>
+                <div className="bg-gray-50 p-4 rounded-lg">
                   <label className="block text-sm font-medium text-gray-500 mb-1">First Name</label>
-                  <p className="text-lg text-gray-900">{accountInfo?.firstName || 'Not provided'}</p>
+                  <p className="text-lg text-gray-400">{accountInfo?.firstName || 'Not provided'}</p>
                 </div>
-                <div>
+                <div className="bg-gray-50 p-4 rounded-lg">
                   <label className="block text-sm font-medium text-gray-500 mb-1">Last Name</label>
-                  <p className="text-lg text-gray-900">{accountInfo?.lastName || 'Not provided'}</p>
+                  <p className="text-lg text-gray-400">{accountInfo?.lastName || 'Not provided'}</p>
                 </div>
               </div>
-              <div>
+              <div className="bg-gray-50 p-4 rounded-lg">
                 <label className="block text-sm font-medium text-gray-500 mb-1">Gender</label>
-                <p className="text-lg text-gray-900">
+                <p className="text-lg text-gray-400">
                   {accountInfo?.gender ? accountInfo.gender.charAt(0) + accountInfo.gender.slice(1).toLowerCase() : 'Not provided'}
                 </p>
               </div>
@@ -370,19 +373,22 @@ const ProfileSettings = React.memo(() => {
       </div>
 
       {/* Email Management */}
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="bg-white rounded-xl shadow-md overflow-hidden">
         <div className="p-6 border-b bg-gradient-to-r from-green-50 to-emerald-50">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-green-100 rounded-lg">
+              <div className="p-3 bg-green-100 rounded-xl">
                 <Mail className="w-5 h-5 text-green-600" />
               </div>
-              <h2 className="text-xl font-semibold text-gray-900">Email Address</h2>
+              <div>
+                <h2 className="text-xl font-semibold text-gray-900">Email Address</h2>
+                <p className="text-sm text-gray-600">Update your email address</p>
+              </div>
             </div>
             {editMode !== 'email' && (
               <button
                 onClick={() => setEditMode('email')}
-                className="flex items-center space-x-2 text-green-600 hover:text-green-700 transition-colors bg-white px-3 py-2 rounded-lg shadow-sm hover:shadow-md"
+                className="flex items-center space-x-2 text-green-600 hover:text-green-700 transition-colors bg-white px-4 py-2 rounded-lg shadow-sm hover:shadow-md"
               >
                 <Edit2 size={16} />
                 <span>Change</span>
@@ -426,14 +432,14 @@ const ProfileSettings = React.memo(() => {
                     <button
                       type="submit"
                       disabled={requestEmailOTPMutation.isPending}
-                      className="bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                      className="bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white font-semibold py-3 px-6 rounded-xl transition-colors shadow-md hover:shadow-lg"
                     >
                       {requestEmailOTPMutation.isPending ? 'Sending OTP...' : 'Send OTP'}
                     </button>
                     <button
                       type="button"
                       onClick={handleCancel}
-                      className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-colors"
+                      className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-xl transition-colors"
                     >
                       Cancel
                     </button>
@@ -477,14 +483,14 @@ const ProfileSettings = React.memo(() => {
                     <button
                       type="submit"
                       disabled={verifyEmailOTPMutation.isPending}
-                      className="bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                      className="bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white font-semibold py-3 px-6 rounded-xl transition-colors shadow-md hover:shadow-lg"
                     >
                       {verifyEmailOTPMutation.isPending ? 'Verifying...' : 'Verify & Update'}
                     </button>
                     <button
                       type="button"
                       onClick={handleCancel}
-                      className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-colors"
+                      className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-xl transition-colors"
                     >
                       Cancel
                     </button>
@@ -493,28 +499,34 @@ const ProfileSettings = React.memo(() => {
               )}
             </div>
           ) : (
-            <div>
+            <div className="bg-gray-50 p-6 rounded-lg">
               <label className="block text-sm font-medium text-gray-500 mb-1">Email Address</label>
-              <p className="text-lg text-gray-900">{accountInfo?.email}</p>
+              <div className="flex items-center space-x-2">
+                <Mail size={16} className="text-gray-400" />
+                <p className="text-lg text-gray-900">{accountInfo?.email}</p>
+              </div>
             </div>
           )}
         </div>
       </div>
 
       {/* Phone Management */}
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="bg-white rounded-xl shadow-md overflow-hidden">
         <div className="p-6 border-b bg-gradient-to-r from-purple-50 to-pink-50">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-purple-100 rounded-lg">
+              <div className="p-3 bg-purple-100 rounded-xl">
                 <Phone className="w-5 h-5 text-purple-600" />
               </div>
-              <h2 className="text-xl font-semibold text-gray-900">Phone Number</h2>
+              <div>
+                <h2 className="text-xl font-semibold text-gray-900">Phone Number</h2>
+                <p className="text-sm text-gray-600">Update your phone number</p>
+              </div>
             </div>
             {editMode !== 'phone' && (
               <button
                 onClick={() => setEditMode('phone')}
-                className="flex items-center space-x-2 text-purple-600 hover:text-purple-700 transition-colors bg-white px-3 py-2 rounded-lg shadow-sm hover:shadow-md"
+                className="flex items-center space-x-2 text-purple-600 hover:text-purple-700 transition-colors bg-white px-4 py-2 rounded-lg shadow-sm hover:shadow-md"
               >
                 <Edit2 size={16} />
                 <span>{accountInfo?.phoneNumber ? 'Change' : 'Add'}</span>
@@ -560,14 +572,14 @@ const ProfileSettings = React.memo(() => {
                     <button
                       type="submit"
                       disabled={requestPhoneOTPMutation.isPending}
-                      className="bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                      className="bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white font-semibold py-3 px-6 rounded-xl transition-colors shadow-md hover:shadow-lg"
                     >
                       {requestPhoneOTPMutation.isPending ? 'Sending OTP...' : 'Send OTP'}
                     </button>
                     <button
                       type="button"
                       onClick={handleCancel}
-                      className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-colors"
+                      className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-xl transition-colors"
                     >
                       Cancel
                     </button>
@@ -611,14 +623,14 @@ const ProfileSettings = React.memo(() => {
                     <button
                       type="submit"
                       disabled={verifyPhoneOTPMutation.isPending}
-                      className="bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                      className="bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white font-semibold py-3 px-6 rounded-xl transition-colors shadow-md hover:shadow-lg"
                     >
                       {verifyPhoneOTPMutation.isPending ? 'Verifying...' : 'Verify & Update'}
                     </button>
                     <button
                       type="button"
                       onClick={handleCancel}
-                      className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-colors"
+                      className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-xl transition-colors"
                     >
                       Cancel
                     </button>
@@ -627,13 +639,16 @@ const ProfileSettings = React.memo(() => {
               )}
             </div>
           ) : (
-            <div>
+            <div className="bg-gray-50 p-6 rounded-lg">
               <label className="block text-sm font-medium text-gray-500 mb-1">Phone Number</label>
-              <p className="text-lg text-gray-900">
-                {accountInfo?.phoneNumber || (
-                  <span className="text-gray-400 italic">Not provided</span>
-                )}
-              </p>
+              <div className="flex items-center space-x-2">
+                <Phone size={16} className="text-gray-400" />
+                <p className="text-lg text-gray-900">
+                  {accountInfo?.phoneNumber || (
+                    <span className="text-gray-400 italic">Not provided</span>
+                  )}
+                </p>
+              </div>
             </div>
           )}
         </div>

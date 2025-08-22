@@ -50,11 +50,6 @@ const UserMenu = React.memo(() => {
     return 'User';
   };
 
-  const getInitials = () => {
-    const name = getDisplayName();
-    return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
-  };
-
   if (!user) return null;
 
   return (
@@ -63,39 +58,12 @@ const UserMenu = React.memo(() => {
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition-colors py-2 px-3 rounded-lg hover:bg-gray-50"
       >
-        <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold">
-          {getInitials()}
-        </div>
         <span className="hidden md:block font-medium">{getFirstName()}</span>
         <ChevronDown size={16} className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-xl shadow-xl border z-50 overflow-hidden">
-          {/* User Info Header */}
-          <div className="p-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center text-white font-bold">
-                {getInitials()}
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="font-semibold truncate">
-                  {getDisplayName()}
-                </p>
-                <div className="flex items-center space-x-1 text-blue-100 text-sm">
-                  <Mail size={12} />
-                  <span className="truncate">{accountInfo?.email}</span>
-                </div>
-                {accountInfo?.phoneNumber && (
-                  <div className="flex items-center space-x-1 text-blue-100 text-sm">
-                    <Phone size={12} />
-                    <span>{accountInfo.phoneNumber}</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
+        <div className="absolute right-0 top-full mt-2 w-60 bg-white rounded-lg shadow-lg border z-50 overflow-hidden">
           {/* Menu Items */}
           <div className="py-2">
             <Link

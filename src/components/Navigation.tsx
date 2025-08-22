@@ -65,7 +65,7 @@ const Navigation = React.memo(() => {
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4">
-        <div className="flex flex-row lg:flex-col justify-between py-4">
+        <div className="flex flex-col lg:flex-col justify-between py-4">
           {/* Logo */}
           <div className="flex justify-between items-center space-x-4">
             <div className="text-2xl font-bold text-blue-900">
@@ -77,7 +77,7 @@ const Navigation = React.memo(() => {
                 />
               </Link>
             </div>
-            <div className="hidden md:flex gap-6">
+            <div className="hidden lg:flex gap-6 items-center">
               <img
                 src="/logo/25_years_of_excellence_vel_systems-removebg-preview.png"
                 alt="25 Years Excellence"
@@ -100,7 +100,7 @@ const Navigation = React.memo(() => {
                 ) : (
                   <button
                     onClick={() => setShowAuthModal(true)}
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-4 rounded-lg transition-colors"
                   >
                     Login
                   </button>
@@ -234,10 +234,18 @@ const Navigation = React.memo(() => {
                     setShowAuthModal(true);
                     setIsMenuOpen(false);
                   }}
-                  className="w-full text-left bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+                  className="w-full text-left bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors mt-4"
                 >
                   Login
                 </button>
+              )}
+              {user && (
+                <div className="mt-4 pt-4 border-t border-gray-200">
+                  <div className="flex items-center space-x-4">
+                    <CartIcon />
+                    <UserMenu />
+                  </div>
+                </div>
               )}
             </div>
           </div>

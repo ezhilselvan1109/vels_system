@@ -70,7 +70,7 @@ function App() {
       <AuthProvider>
         <CartProvider>
           <Router>
-            <div className="min-h-screen bg-white">
+            <div className="min-h-screen bg-gray-50">
               <Header />
               <Navigation />
               <main>

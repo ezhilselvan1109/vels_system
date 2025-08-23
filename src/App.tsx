@@ -10,6 +10,10 @@ import LoadingSpinner from './components/LoadingSpinner';
 import WhatsAppFAB from './components/WhatsAppFAB';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import SignalBooster from './pages/securitySolutions/SignalBooster';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import ReturnsPolicy from './pages/ReturnsPolicy';
+import ShippingPolicy from './pages/ShippingPolicy';
+import TermsAndConditions from './pages/TermsAndConditions';
 
 // Create QueryClient instance
 const queryClient = new QueryClient({
@@ -121,6 +125,10 @@ function App() {
                         <Profile />
                       </ProtectedRoute>
                     } />
+                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                    <Route path="/returns-refunds-cancellations-exchange-policy" element={<ReturnsPolicy />} />
+                    <Route path="/shipping-policy" element={<ShippingPolicy />} />
+                    <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
                   </Routes>
                 </Suspense>
               </main>

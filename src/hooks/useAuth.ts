@@ -43,7 +43,7 @@ export const useVerifyOTP = () => {
   
   return useMutation({
     mutationFn: async (data: OTPVerification) => {
-      const response = await apiPost<any>('/auth/user/verify-otp', data);
+      const response = await apiPost<any>('/auth/user/sign-in/verify-otp', data);
       return response;
     },
     onSuccess: () => {

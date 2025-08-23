@@ -127,83 +127,92 @@ const Contact = React.memo(() => {
               </div>
             </div>
           </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 items-start">
+            {/* Contact Form */}
+            <div className="w-full max-w-lg mx-auto">
+              <div className="text-center mb-8">
+                <h3 className="text-3xl font-bold text-gray-900 mb-4">Our Office</h3>
+                <p className="text-lg text-gray-600">
+                  Send us a message and we'll get back to you soon
+                </p>
+              </div>
 
-          {/* Contact Form */}
-          <div className="max-w-2xl mx-auto">
-            <div className="text-center mb-8">
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">
-                Our Office
-              </h3>
-              <p className="text-lg text-gray-600">
-                Send us a message and we'll get back to you soon
-              </p>
-            </div>
-            
-            <form onSubmit={handleSubmit} className="bg-gray-50 rounded-lg p-8">
-              <div className="mb-6">
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                  Name *
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                />
-              </div>
-              
-              <div className="mb-6">
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                  Email Address *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                />
-              </div>
-              
-              <div className="mb-6">
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                  Message *
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                  rows={5}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                />
-              </div>
-              
-              <button
-                type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 transform hover:scale-[1.02]"
+              <form
+                onSubmit={handleSubmit}
+                className="bg-gray-50 rounded-lg p-8 shadow-md"
               >
-                Submit
-              </button>
-            </form>
-          </div>
+                <div className="mb-6">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                  />
+                </div>
 
-          {/* Map Section */}
-          <div className="mt-16">
-            <div className="rounded-lg overflow-hidden shadow-lg">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d124556.12459010752!2d79.89981573844265!3d12.688675102399818!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x3a52fc697744d18f%3A0x7b46f33b43407ac6!2s7%2C%20Varadhanar%20St%2C%20Vedachalam%20Nagar%2C%20Chengalpattu%2C%20Gokulapuram%2C%20Tamil%20Nadu%20603001!3m2!1d12.6886878!2d79.9822176!5e0!3m2!1sen!2sin!4v1755130302180!5m2!1sen!2sin" 
-                width="100%" 
-                height="450" 
+                <div className="mb-6">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                  />
+                </div>
+
+                <div className="mb-6">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Message *
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                    rows={5}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 transform hover:scale-[1.02]"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+
+            {/* Map Section */}
+            <div className="w-full h-80 md:h-[610px] rounded-lg overflow-hidden shadow-lg">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d124556.12459010752!2d79.89981573844265!3d12.688675102399818!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x3a52fc697744d18f%3A0x7b46f33b43407ac6!2s7%2C%20Varadhanar%20St%2C%20Vedachalam%20Nagar%2C%20Chengalpattu%2C%20Gokulapuram%2C%20Tamil%20Nadu%20603001!3m2!1d12.6886878!2d79.9822176!5e0!3m2!1sen!2sin!4v1755130302180!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
                 style={{ border: 0 }}
                 allowFullScreen
-                loading="lazy" 
+                loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="VEL Systems Location"
               />

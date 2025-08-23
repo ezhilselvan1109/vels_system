@@ -111,6 +111,9 @@ const Navigation = React.memo(() => {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center justify-between space-x-2">
+            <Link to="/shop" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/shop' ? 'text-blue-600 font-medium' : ''}`}>
+              Shop
+            </Link>
             <Link to="/power-solutions" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/power-solutions' ? 'text-blue-600 font-medium' : ''}`}>
               Power Solutions
             </Link>
@@ -144,6 +147,12 @@ const Navigation = React.memo(() => {
                 </div>
               </div>
             </div>
+            <Link to="/rental" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/rental' ? 'text-blue-600 font-medium' : ''}`}>
+              Rental
+            </Link>
+            <Link to="/blog" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/blog' ? 'text-blue-600 font-medium' : ''}`}>
+              Blog
+            </Link>
             <Link to="/about" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/about' ? 'text-blue-600 font-medium' : ''}`}>
               About Us
             </Link>
@@ -152,15 +161,6 @@ const Navigation = React.memo(() => {
             </Link>
             <Link to="/customers" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/customers' ? 'text-blue-600 font-medium' : ''}`}>
               Our Customers
-            </Link>
-            <Link to="/rental" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/rental' ? 'text-blue-600 font-medium' : ''}`}>
-              Rental
-            </Link>
-            <Link to="/shop" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/shop' ? 'text-blue-600 font-medium' : ''}`}>
-              Shop
-            </Link>
-            <Link to="/blog" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/blog' ? 'text-blue-600 font-medium' : ''}`}>
-              Blog
             </Link>
             <Link to="/contact" className={`text-gray-700 hover:text-blue-600 transition-colors ${location.pathname === '/contact' ? 'text-blue-600 font-medium' : ''}`}>
               Contact Us
@@ -180,11 +180,10 @@ const Navigation = React.memo(() => {
         {isMenuOpen && (
           <div className="lg:hidden py-4 border-t border-gray-200">
             <div className="space-y-4">
-              <div>
-                <Link to="/power-solutions" className="block text-gray-700 hover:text-blue-600 transition-colors">
-                  <span>Power Solutions</span>
-                </Link>
-              </div>
+              <Link to="/shop" onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">Shop</Link>
+              <Link to="/power-solutions"  onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">
+                Power Solutions
+              </Link>
               <div>
                 <button
                   onClick={() => handleDropdownToggle('it')}
@@ -225,8 +224,10 @@ const Navigation = React.memo(() => {
               <Link to="/services" onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">Our Services</Link>
               <Link to="/customers" onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">Our Customers</Link>
               <Link to="/rental" onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">Rental</Link>
-              <Link to="/shop" onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">Shop</Link>
               <Link to="/blog" onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">Blog</Link>
+              <Link to="/about" onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">About Us</Link>
+              <Link to="/services" onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">Our Services</Link>
+              <Link to="/customers" onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">Our Customers</Link>
               <Link to="/contact" onClick={handleMobileLinkClick} className="block text-gray-700 hover:text-blue-600 transition-colors">Contact Us</Link>
               {!user && (
                 <button

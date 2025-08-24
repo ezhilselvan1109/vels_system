@@ -234,7 +234,7 @@ const Home = React.memo(() => {
       <ClientCarousel />
 
       {/* Contact Form Section */}
-      <ContactForm />
+      {/* <ContactForm /> */}
     </div>
   );
 });

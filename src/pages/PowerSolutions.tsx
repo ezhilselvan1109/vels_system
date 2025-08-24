@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { ChevronDown, ChevronUp, Phone } from 'lucide-react';
+import SolarSolutionsTabs from '../components/SolarSolutionsTabs';
 
 const PowerSolutions = React.memo(() => {
   const [openAccordion, setOpenAccordion] = useState<number | null>(null);
@@ -67,65 +68,6 @@ const PowerSolutions = React.memo(() => {
         </div>
       </section>
 
-      {/* Solar Images */}
-      {/* <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            <div className="rounded-lg overflow-hidden shadow-lg">
-              <img 
-                src="/powerSolutions/vel-systems-solar-F-2-scaled.jpg" 
-                alt="VEL Systems Solar Installation"
-                className="w-full h-64 object-cover"
-                loading="lazy"
-              />
-            </div>
-            <div className="rounded-lg overflow-hidden shadow-lg">
-              <img 
-                src="/powerSolutions/vels-1-scaled.jpg" 
-                alt="Solar Panel Installation"
-                className="w-full h-64 object-cover"
-                loading="lazy"
-              />
-            </div>
-            <div className="rounded-lg overflow-hidden shadow-lg">
-              <img 
-                src="/powerSolutions/vels-Copy-scaled.jpg" 
-                alt="Solar Energy Solutions"
-                className="w-full h-64 object-cover"
-                loading="lazy"
-              />
-            </div>
-          </div>
-
-          <div className="max-w-4xl mx-auto text-center">
-            <p className="text-lg text-gray-700 leading-relaxed mb-8">
-              At VEL Systems, we bring you efficient, affordable, and eco-friendly solar energy solutions tailored for both homes and businesses. Whether you're looking to reduce electricity bills, become energy independent, or contribute to a greener planet — we've got you covered.
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-blue-50 p-6 rounded-lg">
-                <h3 className="font-semibold text-gray-900 mb-4">Our Services Include:</h3>
-                <ul className="text-left space-y-2 text-gray-700">
-                  <li>✅ Residential & Commercial Solar Panel Installation</li>
-                  <li>✅ On-Grid, Off-Grid & Hybrid Systems</li>
-                  <li>✅ High-Quality Solar Inverters & Batteries</li>
-                  <li>✅ Expert Guidance, Hassle-Free Setup, and AMC Support</li>
-                </ul>
-              </div>
-              <div className="bg-green-50 p-6 rounded-lg">
-                <h3 className="font-semibold text-gray-900 mb-4">Why Choose Us:</h3>
-                <p className="text-gray-700 text-left">
-                  We use trusted brands and latest technology to ensure maximum output and long-term reliability. From planning to installation and after-sales service — we provide end-to-end solar solutions.
-                </p>
-                <p className="text-blue-600 font-semibold mt-4">
-                  🌞 Invest in solar once — save for decades.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-
       {/* Why Choose Us Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
@@ -174,113 +116,7 @@ const PowerSolutions = React.memo(() => {
       </section>
 
       {/* Our Customized Solutions */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Our Customized Solutions
-            </h2>
-            <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-              <div className="aspect-w-16 aspect-h-9 overflow-hidden">
-                <img
-                  src="https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg?auto=compress&cs=tinysrgb&w=400"
-                  alt="Residential Solar"
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
-                  Residential Solar
-                </h3>
-                <p className="text-gray-600 leading-relaxed mb-4">
-                  Complete solar solutions for homes with government subsidies and easy financing options.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-              <div className="aspect-w-16 aspect-h-9 overflow-hidden">
-                <img
-                  src="https://images.pexels.com/photos/9875414/pexels-photo-9875414.jpeg?auto=compress&cs=tinysrgb&w=400"
-                  alt="Commercial Solar"
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
-                  Commercial Solar
-                </h3>
-                <p className="text-gray-600 leading-relaxed mb-4">
-                  Scalable solar systems for businesses to reduce operational costs and carbon footprint.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-              <div className="aspect-w-16 aspect-h-9 overflow-hidden">
-                <img
-                  src="https://images.pexels.com/photos/2800832/pexels-photo-2800832.jpeg?auto=compress&cs=tinysrgb&w=400"
-                  alt="Industrial Solar"
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
-                  Industrial Solar
-                </h3>
-                <p className="text-gray-600 leading-relaxed mb-4">
-                  High-capacity solar installations for manufacturing and industrial facilities.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-              <div className="aspect-w-16 aspect-h-9 overflow-hidden">
-                <img
-                  src="https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg?auto=compress&cs=tinysrgb&w=400"
-                  alt="Solar Plant"
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
-                  Solar Plant
-                </h3>
-                <p className="text-gray-600 leading-relaxed mb-4">
-                  Large-scale solar power plants for utility-grade electricity generation.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group md:col-span-2 lg:col-span-1">
-              <div className="aspect-w-16 aspect-h-9 overflow-hidden">
-                <img
-                  src="https://images.pexels.com/photos/9875414/pexels-photo-9875414.jpeg?auto=compress&cs=tinysrgb&w=400"
-                  alt="Floating Solar"
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
-                  Floating Solar
-                </h3>
-                <p className="text-gray-600 leading-relaxed mb-4">
-                  Innovative floating solar systems for water bodies and reservoirs.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <SolarSolutionsTabs />
 
       {/* Finance Section */}
       <section className="py-16 bg-gray-50">

@@ -41,15 +41,15 @@ const ClientCarousel: React.FC = React.memo(() => {
         >
           {customerImages.map((image, index) => (
             <SwiperSlide key={index}>
-              <div className="overflow-hidden transition-shadow duration-300 group flex items-center justify-center ">
-                <img
-                  src={image}
-                  alt={`Client Logo ${index + 1}`}
-                  className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
+                <div className="h-24 md:h-32 flex items-center justify-center">
+                  <img
+                    src={image}
+                    alt={`Client Logo ${index + 1}`}
+                    className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
             </SwiperSlide>
           ))}
         </Swiper>

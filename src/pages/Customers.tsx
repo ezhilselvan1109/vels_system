@@ -6,13 +6,7 @@ const Customers = React.memo(() => {
     () =>
       Array.from({ length: 68 }, (_, i) => {
         const index = i + 1;
-        // handle mixed extensions (jpeg/png/jpg) – adjust if your files follow one pattern
-        const extension =
-          index === 1 || index === 3 || index === 4 || index === 5 ? "jpeg" :
-          index === 6 || index === 9 || index === 13 || index === 18 || index === 19 || index === 20 ? "jpg" :
-          index === 2 || index === 7 || index === 8 || index === 10 || index === 11 || index === 12 || index === 14 || index === 16 || index === 17 ? "png" :
-          "jpg"; // fallback
-        return `/customer/customer-${index}.${extension}`;
+        return `/customer/customer-${index}.png`;
       }),
     []
   );
@@ -38,7 +32,7 @@ const Customers = React.memo(() => {
             {customerImages.map((image, index) => (
               <div
                 key={index}
-                className="aspect-square rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 group flex items-center justify-center bg-white border border-gray-200"
+                className="overflow-hidden transition-shadow duration-300 group flex items-center justify-center"
               >
                 <img
                   src={image}

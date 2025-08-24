@@ -46,16 +46,16 @@ const Slideshow = React.memo(() => {
     setCurrentSlide(prev => (prev + 1) % slides.length);
   }, []);
 
-  const prevSlide = useCallback(() => {
-    setCurrentSlide(prev => (prev - 1 + slides.length) % slides.length);
-  }, []);
+  // const prevSlide = useCallback(() => {
+  //   setCurrentSlide(prev => (prev - 1 + slides.length) % slides.length);
+  // }, []);
 
   const goToSlide = useCallback((index: number) => {
     setCurrentSlide(index);
   }, []);
 
   useEffect(() => {
-    const timer = setInterval(nextSlide, 5000);
+    const timer = setInterval(nextSlide, 2000);
     return () => clearInterval(timer);
   }, [nextSlide]);
 
@@ -98,7 +98,7 @@ const Slideshow = React.memo(() => {
       </div>
 
       {/* Navigation Arrows */}
-      <button
+      {/* <button
         onClick={prevSlide}
         className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 rounded-full transition-all duration-300"
       >
@@ -109,7 +109,7 @@ const Slideshow = React.memo(() => {
         className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 rounded-full transition-all duration-300"
       >
         <ChevronRight size={24} />
-      </button>
+      </button> */}
 
       {/* Dot Indicators */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">

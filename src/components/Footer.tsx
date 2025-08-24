@@ -6,7 +6,7 @@ const Footer = React.memo(() => {
   return (
     <footer className="bg-gray-900 text-white pt-12 pb-8">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-center justify-center">
 
           {/* Company Info */}
           <div>
@@ -23,7 +23,6 @@ const Footer = React.memo(() => {
             </p>
             {/* Social Links */}
             <div>
-              <h3 className="text-md font-semibold mb-2">SOCIAL</h3>
               <div className="flex items-center space-x-4">
                 <a
                   href="https://facebook.com"

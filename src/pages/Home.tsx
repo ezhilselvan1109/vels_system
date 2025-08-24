@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import Slideshow from '../components/Slideshow';
 import ProductCard from '../components/ProductCard';
 import ContactForm from '../components/ContactForm';
+import ClientCarousel from '../components/ClientCarousel';
 
 const Home = React.memo(() => {
   const itProducts = useMemo(() => [
@@ -181,7 +182,7 @@ const Home = React.memo(() => {
   return (
     <div>
       <Slideshow />
-      
+
       {/* IT Products & Solutions Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
@@ -191,7 +192,7 @@ const Home = React.memo(() => {
             </h2>
             <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {itProducts.map((product) => (
               <ProductCard
@@ -215,7 +216,7 @@ const Home = React.memo(() => {
             </h2>
             <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {securityProducts.map((product) => (
               <ProductCard
@@ -229,6 +230,8 @@ const Home = React.memo(() => {
           </div>
         </div>
       </section>
+      
+      <ClientCarousel />
 
       {/* Contact Form Section */}
       <ContactForm />

@@ -81,7 +81,6 @@ const ProductCard = React.memo(({ product }: ProductCardProps) => {
         <div className="flex space-x-2">
           <button
             onClick={handleAddToCart}
-            disabled={itemInCart}
             disabled={itemInCart || loading}
             className={`flex-1 flex items-center justify-center py-2 px-3 rounded-lg font-medium transition-colors duration-300 disabled:opacity-50 ${
               itemInCart

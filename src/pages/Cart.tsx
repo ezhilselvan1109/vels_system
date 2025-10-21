@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Plus, Minus, Trash2, ShoppingBag, CreditCard } from 'lucide-react';
+import { toast } from 'react-toastify';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -23,11 +24,14 @@ const Cart = React.memo(() => {
 
   const handleCheckout = () => {
     if (!user) {
-      navigate('/', { state: { showAuth: true } });
+      // Show auth modal by navigating to home and triggering auth
+      navigate('/');
+      // You can add a toast message to inform user to login
+      toast.info('Please login to proceed with checkout');
       return;
     }
     // TODO: Implement checkout functionality
-    alert('Checkout functionality will be implemented soon!');
+    toast.info('Checkout functionality will be implemented soon!');
   };
 
   return (
@@ -145,7 +149,9 @@ const Cart = React.memo(() => {
                                   value={item.quantity}
                                   onChange={(e) => {
                                     const newQuantity = parseInt(e.target.value) || 1;
-                                    handleQuantityChange(item.id, newQuantity);
+                                    if (newQuantity > 0) {
+                                      handleQuantityChange(item.id, newQuantity);
+                                    }
                                   }}
                                   disabled={loading}
                                   className="w-16 text-center py-2 border-0 focus:ring-0 disabled:opacity-50"
@@ -247,7 +253,7 @@ const Cart = React.memo(() => {
                   <li>• Free delivery on all orders</li>
                   <li>• Same day delivery available</li>
                   <li>• Professional installation included</li>
-                  <li>• 30-day return policy</li>
+                  <li>• Comprehensive warranty support</li>
                 </ul>
               </div>
             </div>

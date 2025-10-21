@@ -112,9 +112,7 @@ export const useUpdateServerCartItem = () => {
   
   return useMutation({
     mutationFn: async ({ itemId, quantity }: { itemId: string; quantity: number }) => {
-      const response = await apiPut<ServerCart>(
-        `${ENDPOINTS.UPDATE_ITEM(itemId)}?quantity=${quantity}`
-      );
+      const response = await apiPut<ServerCart>(ENDPOINTS.UPDATE_ITEM(itemId), { quantity });
       return response;
     },
     onSuccess: () => {

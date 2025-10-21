@@ -173,7 +173,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Sync local cart to server when user logs in
   useEffect(() => {
-    if (user && cart.items.length > 0) {
+    if (user && cart.items.length > 0 && !syncCartToServerMutation.isPending) {
       const localCartItems = cart.items.map(item => ({
         variantId: item.variantId,
         quantity: item.quantity
@@ -191,11 +191,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         },
       });
     }
-  }, [user]); // Only run when user changes
+  }, [user, cart.items.length]); // Run when user changes or cart has items
 
   // Update local cart when server cart changes
   useEffect(() => {
-    if (user && serverCartData?.success && serverCartData.data) {
+    if (user && serverCartData?.success && serverCartData.data && !syncCartToServerMutation.isPending) {
       const localCart = convertServerCartToLocal(serverCartData.data);
       dispatch({ type: 'SYNC_FROM_SERVER', payload: localCart });
     }

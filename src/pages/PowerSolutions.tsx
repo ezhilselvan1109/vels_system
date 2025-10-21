@@ -69,48 +69,77 @@ const PowerSolutions = React.memo(() => {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-16 bg-white">
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          {/* Heading */}
+          <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Why Choose Us?
             </h2>
-            <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              We bring 25+ years of trust, expertise, and innovation in delivering
+              reliable solar energy solutions with complete end-to-end support.
+            </p>
+            <div className="w-24 h-1 bg-blue-600 mx-auto mt-6"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-blue-50 rounded-lg p-6 text-center hover:shadow-lg transition-shadow duration-300">
-              <div className="text-blue-600 font-bold text-lg mb-2">Trust & Reliability</div>
-              <p className="text-gray-700 text-sm">25+ years of trusted service</p>
-            </div>
-            <div className="bg-green-50 rounded-lg p-6 text-center hover:shadow-lg transition-shadow duration-300">
-              <div className="text-green-600 font-bold text-lg mb-2">Govt-Authorized Vendor</div>
-              <p className="text-gray-700 text-sm">Certified and approved</p>
-            </div>
-            <div className="bg-purple-50 rounded-lg p-6 text-center hover:shadow-lg transition-shadow duration-300">
-              <div className="text-purple-600 font-bold text-lg mb-2">Flexible Financing</div>
-              <p className="text-gray-700 text-sm">Easy payment options</p>
-            </div>
-            <div className="bg-orange-50 rounded-lg p-6 text-center hover:shadow-lg transition-shadow duration-300">
-              <div className="text-orange-600 font-bold text-lg mb-2">TNEB Approval</div>
-              <p className="text-gray-700 text-sm">Fully compliant systems</p>
-            </div>
-            <div className="bg-red-50 rounded-lg p-6 text-center hover:shadow-lg transition-shadow duration-300">
-              <div className="text-red-600 font-bold text-lg mb-2">Experienced Engineers</div>
-              <p className="text-gray-700 text-sm">Expert installation team</p>
-            </div>
-            <div className="bg-yellow-50 rounded-lg p-6 text-center hover:shadow-lg transition-shadow duration-300">
-              <div className="text-yellow-600 font-bold text-lg mb-2">Subsidy Guidance</div>
-              <p className="text-gray-700 text-sm">Complete paperwork support</p>
-            </div>
-            <div className="bg-indigo-50 rounded-lg p-6 text-center hover:shadow-lg transition-shadow duration-300">
-              <div className="text-indigo-600 font-bold text-lg mb-2">20,000+ Satisfied Customers</div>
-              <p className="text-gray-700 text-sm">Proven track record</p>
-            </div>
-            <div className="bg-teal-50 rounded-lg p-6 text-center hover:shadow-lg transition-shadow duration-300">
-              <div className="text-teal-600 font-bold text-lg mb-2">ISO 9001:2015 Certified</div>
-              <p className="text-gray-700 text-sm">Quality assured</p>
-            </div>
+          {/* Feature Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                title: "Trust & Reliability",
+                desc: "25+ years of trusted service",
+                icon: "💎",
+              },
+              {
+                title: "Govt-Authorized Vendor",
+                desc: "Certified and approved",
+                icon: "✅",
+              },
+              {
+                title: "Flexible Financing",
+                desc: "Easy EMI & loan options",
+                icon: "💳",
+              },
+              {
+                title: "TNEB Approval",
+                desc: "Fully compliant systems",
+                icon: "📜",
+              },
+              {
+                title: "Experienced Engineers",
+                desc: "Expert installation team",
+                icon: "👷‍♂️",
+              },
+              {
+                title: "Subsidy Guidance",
+                desc: "Complete paperwork support",
+                icon: "📑",
+              },
+              {
+                title: "20,000+ Customers",
+                desc: "A proven track record",
+                icon: "🌍",
+              },
+              {
+                title: "ISO Certified",
+                desc: "ISO 9001:2015 Quality assured",
+                icon: "🏅",
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center group"
+              >
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {item.icon}
+                </div>
+                <h4 className="text-lg font-semibold text-gray-900 mb-2">
+                  {item.title}
+                </h4>
+                <p className="text-gray-600 text-sm">{item.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -245,8 +274,8 @@ const PowerSolutions = React.memo(() => {
             Cut down electricity expenses with our end-to-end solar installation services backed by 25+ years of trust and 20,000+ happy clients.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a 
-              href="tel:+916572263827" 
+            <a
+              href="tel:+916572263827"
               className="inline-flex items-center bg-yellow-500 hover:bg-yellow-400 text-black font-semibold px-8 py-3 rounded-lg transition-colors duration-300 transform hover:scale-105"
             >
               <Phone size={20} className="mr-2" />
